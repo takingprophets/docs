@@ -1,0 +1,634 @@
+---
+title: "iFVG Ultimate+"
+description: "Complete input reference for the iFVG Ultimate+ | DodgysDD indicator."
+---
+
+## Overview
+
+**iFVG Ultimate+** is a precision entry tool built around the **Inverse Fair Value Gap (iFVG)** concept. It detects when a Fair Value Gap (FVG) gets fully closed (inverted) by price, then grades and displays that inversion as a potential entry — what DodgysDD calls a **DD entry**.
+
+The indicator handles the full workflow on a single chart: marking liquidity levels, identifying the sweep, detecting the inversion, grading the setup, and displaying the entry with take profit, break even, and stop loss levels.
+
+---
+
+## Groups at a Glance
+
+The settings panel is organized into these groups:
+
+1. [General Settings](#general-settings)
+2. [Liquidity](#liquidity)
+3. [REQH/L](#reqhl)
+4. [Session Liquidity](#session-liquidity)
+5. [Key Open](#key-open)
+6. [High Time Frame Fair Value Gaps](#high-time-frame-fair-value-gaps)
+7. [SMT](#smt)
+8. [DD Entry](#dd-entry)
+9. [Limits](#limits)
+10. [Alerts](#alerts)
+11. [Watermark](#watermark)
+12. [Checklist](#checklist)
+
+---
+
+## General Settings
+
+These settings control the core behavior of how iFVGs are detected, filtered, and displayed.
+
+**Detection** — `Series` | `Single` (default: `Single`)
+
+Controls how adjacent FVGs are treated before inversion. `Single` treats each FVG independently — when one is closed, that single gap is the inversion. `Series` merges adjacent FVGs into one combined gap, so the entire chain must be closed for an inversion to register. Use `Single` for cleaner, more frequent signals. Use `Series` when you only want high-conviction setups where a cluster of imbalances is fully absorbed.
+
+---
+
+**Sensitivity** — `Sensitive` | `Normal` | `Strict` (default: `Normal`)
+
+Filters out FVGs that are too small to be meaningful by comparing the gap size against the ATR. `Sensitive` allows even very small gaps (ATR multiplier = 0). `Normal` requires a minimum gap of 0.25× ATR — a reasonable middle ground that filters out noise without being overly restrictive. `Strict` requires 0.75× ATR, keeping only large, obvious imbalances. If you're getting too many low-quality setups, move to `Strict`. If valid setups are being filtered out, drop to `Sensitive`.
+
+---
+
+**Bias** — `Neutral` | `Bullish` | `Bearish` (default: `Neutral`)
+
+Limits which direction of setups the indicator draws. `Neutral` shows both bullish and bearish DD entries. `Bullish` shows only long setups. `Bearish` shows only short setups. Use this to cut chart clutter when you already have a directional read on the session.
+
+---
+
+**Hide Losing Setups** — toggle (default: on)
+
+When a setup gets stopped out, this removes it from the chart entirely rather than greying it out. Keeps your chart clean by only showing active and winning setups.
+
+---
+
+**Allow 7-15 Candle IFVGs** — toggle (default: on)
+
+Controls the formation window for an inversion. When on, the price can close the FVG within up to 15 candles of formation. When off, the window tightens to 6 candles — only allowing fast, sharp inversions. Tighter windows tend to produce higher-quality setups but fewer of them.
+
+---
+
+**Require Influx of Volume** — toggle (default: off)
+
+When enabled, an inversion only qualifies if a significant volume spike accompanies it — specifically, the 5-bar volume SMA must exceed 2× the 100-bar volume SMA at the time of inversion. Adds a volume confirmation layer to every setup. Useful if you want institutional fingerprinting on each entry.
+
+---
+
+**Require Delivery from HTF FVG** — toggle (default: off)
+
+Only shows setups where price is currently delivering from a higher timeframe Fair Value Gap. Forces confluence with HTF PDA structure before any setup is drawn. Reduces total signals but increases quality. Works in tandem with the HTF FVG group settings.
+
+---
+
+**Include Current TF in HTF Delivery** — toggle (default: off)
+
+When `Require Delivery from HTF FVG` is active, this decides whether the current chart timeframe is considered a valid "higher timeframe." Off by default — meaning a 1m inversion delivering from a 1m FVG would be ignored. Turn on only if you want same-timeframe FVG delivery to count.
+
+---
+
+**Require Session Liquidity Delivery** — toggle (default: off)
+
+Only shows setups that are delivering from a session liquidity sweep (NYAM, NYPM, Asia, London highs/lows). Ensures the setup follows a proper liquidity sweep before entry. Strong confluence filter — use this when you want every setup to have a clean sweep-to-inversion narrative.
+
+---
+
+**Require BE Not Breached on Inversion** — toggle (default: on)
+
+Blocks a setup from registering if price closes past the anticipated break-even level on the inversion bar itself. Keeps only clean inversions where the candle doesn't immediately run through BE. Disabling allows setups to trigger even when the inversion candle pushes aggressively — useful in fast-moving sessions but increases risk.
+
+---
+
+**Require Macro Time** — toggle + window (default: off)
+
+When on, only displays setups that form during a specific macro window each hour. Two window options:
+
+- `00:45-00:15` — last 15 minutes of the hour through the first 15 minutes of the next (the standard ICT macro window)
+- `00:50-00:10` — tighter 10-minute window around the hour mark
+
+Use this to enforce strict macro-based timing discipline.
+
+---
+
+**Min DD Grade to Display** — `C` | `B-` | `B+` | `A` | `A+` (default: `C`)
+
+Every setup is graded based on confluence factors (liquidity sweep, HTF PDA delivery, volume, SMT, clear targets). This setting filters out any setup below the selected grade. `C` shows everything. `A+` shows only the highest-confluence setups. Raise this threshold when you want fewer, higher-quality signals. See the Checklist group for which factors feed into the grade.
+
+---
+
+**Number of Setups Displayed** — integer, 1–100 (default: `10`)
+
+Limits how many recent setups are drawn on the chart at once. Only the most recent X setups are shown, regardless of how many have formed in the lookback window. Keep this low (5–10) to avoid a cluttered chart; raise it when reviewing historical performance.
+
+---
+
+## Liquidity
+
+Controls how higher timeframe liquidity levels and sweeps are detected and drawn.
+
+**Alignment Mode** — `Automatic` | `Manual` (default: `Automatic`)
+
+Determines which timeframe the indicator aligns to when detecting swing highs and lows for liquidity. `Automatic` selects an appropriate HTF based on your current chart timeframe. `Manual` lets you set it explicitly using the Timeframe input below.
+
+---
+
+**Timeframe** — timeframe selector (default: `15`, active only when Alignment Mode = `Manual`)
+
+The specific timeframe used for liquidity sweep detection when in Manual mode. For example, set to `60` to detect sweeps of 1H swing highs/lows regardless of your chart timeframe.
+
+---
+
+**Show Liquidity** — toggle + Buyside / Sellside colors (default: off)
+
+Draws horizontal lines at the detected HTF swing highs (buyside liquidity) and swing lows (sellside liquidity). The two color pickers set the color for buyside and sellside lines separately. Off by default — these lines add useful context but can clutter the chart.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Visual style for the liquidity level lines.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` | `Huge` (default: `Tiny`)
+
+Size of the labels attached to liquidity level lines.
+
+---
+
+**Show Liquidity Sweeps** — toggle + color + label text (default: on, black, `$$$`)
+
+Draws a marker when a liquidity level is swept. The color picker sets the color of the sweep drawing. The text field sets the label that appears at the sweep — defaults to `$$$` as a visual cue that liquidity was taken. Change the label to anything that makes sense in your workflow.
+
+---
+
+**Sweep Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Visual style for the line drawn at the sweep point.
+
+---
+
+**Label Size** (sweeps) — `Tiny` | `Small` | `Normal` | `Large` (default: `Tiny`)
+
+Size of the sweep label text.
+
+---
+
+**Show Data High/Low** — toggle + color (default: on, black)
+
+Draws markers at data high/low wick points — significant price extremes derived from a 6-point wick calculation. These mark areas where institutional order flow likely caused sharp wick rejections. Useful for identifying key data-driven price levels that act as reference points for entries.
+
+---
+
+**Data Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Visual style for data high/low lines.
+
+---
+
+## REQH/L
+
+REQH/L stands for **Relatively Equal Highs and Lows** — price levels where multiple swing points cluster closely together, indicating resting liquidity.
+
+**Show REQH/L** — toggle + Buyside / Sellside colors (default: off)
+
+Draws lines at relatively equal highs (buyside) and lows (sellside). These are areas where stop orders accumulate above/below clustered swing points — prime targets for liquidity sweeps before a move.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Visual style for REQH/L lines.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Tiny`)
+
+Size of the REQH/L labels.
+
+---
+
+**Show Labels** — toggle + Label Placement `Left` | `Right` (default: on, `Right`)
+
+Toggles label visibility for REQH/L levels. Placement determines whether the label appears at the start (`Left`) or end (`Right`) of the line.
+
+---
+
+## Session Liquidity
+
+Draws and tracks the highs and lows of each major trading session. These become reference levels for session liquidity sweeps.
+
+**Lookback** — `1 Day` | `3 Days` | `5 Days` | `1 Week` | `1 Month` (default: `1 Day`)
+
+How far back session highs/lows are drawn on the chart. `1 Day` shows only the most recent sessions. Extend this to see more historical session levels for context.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Tiny`)
+
+Size of session liquidity labels.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Visual style of session liquidity lines.
+
+---
+
+**Preserve Session Liquidity After Mitigation** — toggle (default: off)
+
+When on, session levels stay visible on the chart even after being swept. Currently not yet fully implemented — leave off.
+
+---
+
+**NYAM** — toggle + color + session time (default: on, black, `0900-1130`)
+
+New York AM session. Draws the high and low of the NY morning session. The session time can be adjusted if needed — default covers the standard NYAM window.
+
+---
+
+**NYPM** — toggle + color + session time (default: on, black, `1300-1600`)
+
+New York PM session. Covers the afternoon session from 1 PM to 4 PM ET.
+
+---
+
+**ASIA** — toggle + color + session time (default: on, black, `2000-0000`)
+
+Asian session. Draws the high and low of the overnight Asia range. Default window is 8 PM to midnight ET.
+
+---
+
+**LONDON** — toggle + color + session time (default: on, black, `0200-0500`)
+
+London session. Default window is 2 AM to 5 AM ET — the London open and early session.
+
+---
+
+**PDH/PDL** — toggle + PDH color + PDL color (default: on, black / black)
+
+Previous Day High and Low. These are among the most important session liquidity levels — price frequently sweeps PDH or PDL before making a directional move. Separate color pickers for PDH and PDL.
+
+---
+
+**PWH/PWL** — toggle + PWH color + PWL color (default: on, black / black)
+
+Previous Week High and Low. Higher timeframe liquidity targets. Useful for framing the weekly narrative and identifying when price is running for weekly levels.
+
+---
+
+## Key Open
+
+Draws horizontal lines at significant daily open prices — key reference levels for the trading day.
+
+**M.N.O** — toggle + color (default: on, black)
+
+Midnight Open. The price at midnight ET — a core ICT reference level used to identify the directional bias for the day.
+
+---
+
+**9:30** — toggle + color (default: on, black)
+
+New York Stock Exchange open price. The 9:30 AM ET open is a key reference for the cash session.
+
+---
+
+**8:30** — toggle + color (default: on, black)
+
+The 8:30 AM ET open — coincides with major economic data releases (CPI, NFP, etc.). A critical level when high-impact news is scheduled.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Visual style for key open lines.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` | `Huge` (default: `Tiny`)
+
+Size of key open labels.
+
+---
+
+## High Time Frame Fair Value Gaps
+
+Draws Fair Value Gaps from higher timeframes directly on your chart. These serve as the PDA (Premium/Discount Array) delivery zones that feed the `Require Delivery from HTF FVG` filter.
+
+**Show HTF FVGs** — toggle (default: on)
+
+Master toggle for HTF FVG drawing.
+
+---
+
+**Show Border** — toggle (default: off)
+
+Adds an outline border around HTF FVG boxes. Off by default — turn on if you want a more defined box edge.
+
+---
+
+**C.E** — toggle + color + line style (default: on, black, `Dotted`)
+
+Consequent Encroachment — draws a line at the 50% midpoint of each HTF FVG. The CE is a key internal reference within a gap: it's where price often reacts or stalls. The color and style of the CE line are set with the adjacent inputs.
+
+---
+
+**Label Color** — color picker (default: black)
+
+Color of the text labels on HTF FVG boxes.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Tiny`)
+
+Size of HTF FVG labels.
+
+---
+
+**Bullish Color** — color picker (default: gray, 80% transparent)
+
+Fill color for bullish HTF FVGs (gaps below price, acting as support).
+
+---
+
+**Bearish Color** — color picker (default: gray, 80% transparent)
+
+Fill color for bearish HTF FVGs (gaps above price, acting as resistance).
+
+---
+
+## SMT
+
+SMT (Smart Money Technique) divergence — detects when a correlated asset makes a new swing high/low but the primary instrument does not, or vice versa. An SMT divergence at a liquidity level is a strong confluence signal for a reversal.
+
+**Enable SMT Detection** — toggle (default: on)
+
+Master toggle for SMT. When on, the indicator monitors a correlated asset and marks divergences.
+
+---
+
+**SMT Correlation Mode** — `Automatic` | `Manual` (default: `Automatic`)
+
+`Automatic` pairs your instrument with its commonly accepted correlated asset (e.g., NQ and ES are automatically paired). If the current instrument has no built-in pair, it falls back to the manual symbol. `Manual` forces correlation to the symbol set below regardless of what instrument you're on.
+
+---
+
+**Manual Correlated Symbol** — symbol input (default: `CME_MINI:ES1!`)
+
+The correlated asset used when Correlation Mode is `Manual` or when there's no automatic pair for your instrument.
+
+---
+
+**Display Correlated Asset** — toggle (default: on)
+
+When on, the correlated asset's symbol is shown in the checklist next to the SMT item and in DD entry tooltips. Useful for confirming at a glance which asset the SMT is referencing.
+
+---
+
+**Style** — color + `Solid` | `Dashed` | `Dotted` + label size (default: black, `Solid`, `Tiny`)
+
+Visual settings for the SMT divergence line drawn on the chart.
+
+---
+
+## DD Entry
+
+Controls how the inversion (DD entry) itself is displayed once a setup triggers.
+
+**Show Entry** — toggle + label size (default: on, `Tiny`)
+
+Master toggle for drawing the entry box on the chart. When on, the inverted FVG is highlighted as the DD entry zone.
+
+---
+
+**Long Color** — color picker (default: blue)
+
+Color used for bullish DD entry markings.
+
+---
+
+**Short Color** — color picker (default: red)
+
+Color used for bearish DD entry markings.
+
+---
+
+**Display Inversion** — toggle (default: on)
+
+When a FVG gets inverted, this changes the color and extension of the original FVG box to visually distinguish it as an IFVG. Off shows the original FVG coloring regardless of inversion status. Keep this on — it's the primary visual cue that a setup has triggered.
+
+---
+
+**Inverted Bullish Color** — color picker (default: black, 60% transparent)
+
+Color applied to the FVG box after a bullish inversion is confirmed.
+
+---
+
+**Inverted Bearish Color** — color picker (default: black, 60% transparent)
+
+Color applied to the FVG box after a bearish inversion is confirmed.
+
+---
+
+## Limits
+
+Draws the trade management levels — take profit, break even, and stop loss — directly on the chart for each setup.
+
+**Show Limits** — toggle (default: on)
+
+Master toggle for all limit level drawings (TP, BE, SL).
+
+---
+
+**Show Labels** — toggle (default: on)
+
+Toggles text labels (TP / BE / SL) next to each level line.
+
+---
+
+**Show Prices** — toggle (default: off)
+
+When on, displays the exact price value next to each limit level.
+
+---
+
+**Take Profit** — toggle + color (default: on, black)
+
+Shows the take profit level for each setup.
+
+---
+
+**Break Even** — toggle + color (default: on, orange `#f57c00`)
+
+Shows the break even level — the price at which the trade would be flat. Once price reaches BE, moving your stop to entry eliminates risk on the trade.
+
+---
+
+**Stop Loss** — toggle + color + Stop Placement (default: on, black, `Wick`)
+
+Shows the stop loss level. **Stop Placement** controls how the stop is calculated:
+
+- `Wick` — stop is placed at the swing low/high wick (default, most common)
+- `Body` — stop is placed at the candle body low/high, tighter than the wick
+- `Inversion` — stop is placed just beyond the inversion box itself, the tightest option
+
+Choose based on your risk tolerance and how much room you give the trade. `Wick` is the standard; `Inversion` gives the smallest stop but is more likely to be hit on a retest.
+
+---
+
+**Contract Sizing** — toggle + Risk $ (default: on, `$350`)
+
+When enabled, the indicator calculates and displays the suggested number of contracts based on your defined dollar risk and the current SL distance. Set `Risk ($)` to your max loss per trade in dollars — the indicator does the math automatically based on where the stop is placed.
+
+---
+
+## Alerts
+
+All alerts are gated by the **Enable Alerts** master toggle. When that's off, no alerts fire regardless of individual settings.
+
+**Enable Alerts** — toggle (default: on)
+
+Master switch for all alert functionality.
+
+---
+
+**Session 1 / 2 / 3** — toggle + session time
+
+Restricts when alerts can fire to specific time windows. Session 1 defaults to `0930-1600` (NY cash session) and is on by default. Sessions 2 and 3 are off by default. Session 2 defaults to `2000-0000` (Asia), Session 3 to `0200-0500` (London). Use these to avoid getting alerted outside your trading hours.
+
+---
+
+**Alert on Potential Inversion** — toggle + Fill % + Close In (s) (default: off)
+
+Fires an early warning before the inversion candle closes. The alert triggers when two conditions are met simultaneously: price has filled at least X% of the FVG (`Fill %`, default 50%) and the candle has less than Y seconds left to close (`Close In (s)`, default 15s). Useful for getting ahead of the signal with limit orders.
+
+---
+
+**Bullish DD Inversion** — toggle + custom message (default: on)
+
+Fires when a bullish iFVG setup confirms. The message field lets you customize the alert text — useful if you're routing alerts to a webhook or bot.
+
+---
+
+**Bearish DD Inversion** — toggle + custom message (default: on)
+
+Fires when a bearish iFVG setup confirms.
+
+---
+
+**Alert on Liquidity Sweep** — toggle (default: off)
+
+Fires when a higher timeframe swing high or low is swept. Two separate message fields for HTF High Swept and HTF Low Swept.
+
+---
+
+**Alert on NYAM Liquidity Sweep** — toggle + message (default: off)
+
+Fires when the NYAM session high or low is swept.
+
+---
+
+**Alert on NYPM Liquidity Sweep** — toggle + message (default: off)
+
+Fires when the NYPM session high or low is swept.
+
+---
+
+**Alert on Asia Liquidity Sweep** — toggle + message (default: off)
+
+Fires when the Asia session high or low is swept.
+
+---
+
+**Alert on London Liquidity Sweep** — toggle + message (default: off)
+
+Fires when the London session high or low is swept.
+
+---
+
+**Warn on Close** — toggle + message (default: off)
+
+Fires when price closes past the mitigation level of an active iFVG — a warning that the setup may be invalidating. Good for monitoring active trades.
+
+---
+
+**Alert on Multi TF Inversion** — toggle + message (default: off)
+
+Fires when an inversion is detected across multiple timeframes simultaneously — a high-conviction confluence signal.
+
+---
+
+**Alert on Invalidation** — toggle + message (default: off)
+
+Fires when a potential setup (one that has formed but not yet triggered) gets invalidated by price action.
+
+---
+
+## Watermark
+
+**Display Watermark** — toggle (default: on)
+
+Shows the DodgysDD watermark on the chart.
+
+---
+
+**Text Color** — color picker (default: black, 20% transparent)
+
+Color of the watermark text.
+
+---
+
+## Checklist
+
+The checklist is an on-chart table that grades each setup in real time based on how many confluence factors are present.
+
+**Show Strategy Checklist** — toggle (default: on)
+
+Displays the confluence checklist table on the chart. The checklist shows which conditions are met for the current setup: Liquidity Sweep, HTF PDA Delivery, Volume, IFVG (always counted), Clear Targets, SMT.
+
+---
+
+**Show Setup Grade** — toggle (default: on)
+
+Displays the letter grade for the current setup (C through A+) in the table. The grade is calculated from the checklist items that are enabled and confirmed.
+
+---
+
+**Table Text Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Tiny`)
+
+Size of text within the checklist table.
+
+---
+
+**Cell Normal** — color picker (default: white)
+
+Text color for normal (non-header) cells.
+
+---
+
+**Header Background** — color picker (default: black, 70% transparent)
+
+Background color for the header row of the table.
+
+---
+
+**Header Text** — color picker (default: white)
+
+Text color for header cells.
+
+---
+
+**Checklist Position** — `Bottom Right` | `Bottom Left` | `Top Right` | `Top Left` (default: `Bottom Right`)
+
+Where the checklist table is anchored on the chart. Move it to whichever corner doesn't overlap your price action or other indicators.
+
+---
+
+**Checklist Items** — individual toggles
+
+Controls which factors are included in the grading calculation:
+
+- **Liquidity Sweep** — a HTF swing high/low was swept before the inversion
+- **HTF PDA Delivery** — price is delivering from a higher timeframe FVG
+- **Volume** — significant volume influx present at inversion
+- **Clear Targets** — a clear liquidity target exists above/below for the trade
+- **SMT** — SMT divergence confirmed on the correlated asset
+
+IFVG presence is always included and cannot be toggled off (it's the core condition). Turn off any checklist items that don't fit your trading approach — they'll be excluded from the grade calculation.

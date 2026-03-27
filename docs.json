@@ -41,6 +41,12 @@
             "pages": [
               "partners/overview"
             ]
+          },
+          {
+            "group": "DodgysDD",
+            "pages": [
+              "partners/dodgysdd/ifvg-ultimate"
+            ]
           }
         ]
       }
