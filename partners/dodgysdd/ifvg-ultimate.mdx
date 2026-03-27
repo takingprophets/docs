@@ -38,6 +38,14 @@ These settings control the core behavior of how iFVGs are detected, filtered, an
 
 Controls how adjacent FVGs are treated before inversion. `Single` treats each FVG independently — when one is closed, that single gap is the inversion. `Series` merges adjacent FVGs into one combined gap, so the entire chain must be closed for an inversion to register. Use `Single` for cleaner, more frequent signals. Use `Series` when you only want high-conviction setups where a cluster of imbalances is fully absorbed.
 
+<Frame>
+  <img src="/images/ifvg-single-setting.png" alt="Detection set to Single" />
+</Frame>
+
+<Frame>
+  <img src="/images/ifvg-consecutive-setting.png" alt="Detection set to Series" />
+</Frame>
+
 ---
 
 **Sensitivity** — `Sensitive` | `Normal` | `Strict` (default: `Normal`)
@@ -56,11 +64,27 @@ Limits which direction of setups the indicator draws. `Neutral` shows both bulli
 
 When a setup gets stopped out, this removes it from the chart entirely rather than greying it out. Keeps your chart clean by only showing active and winning setups.
 
+<Frame>
+  <img src="/images/hide-losing-setups-on.png" alt="Hide Losing Setups enabled" />
+</Frame>
+
+<Frame>
+  <img src="/images/hide-losing-setups-off.png" alt="Hide Losing Setups disabled" />
+</Frame>
+
 ---
 
 **Allow 7-15 Candle IFVGs** — toggle (default: on)
 
 Controls the formation window for an inversion. When on, the price can close the FVG within up to 15 candles of formation. When off, the window tightens to 6 candles — only allowing fast, sharp inversions. Tighter windows tend to produce higher-quality setups but fewer of them.
+
+<Frame>
+  <img src="/images/allow-7-15-on.png" alt="Allow 7-15 Candle IFVGs enabled" />
+</Frame>
+
+<Frame>
+  <img src="/images/allow-7-15-off.png" alt="Allow 7-15 Candle IFVGs disabled" />
+</Frame>
 
 ---
 
