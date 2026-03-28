@@ -30,6 +30,61 @@
             "pages": [
               "indicators/overview"
             ]
+          },
+          {
+            "group": "Fair Value Gaps",
+            "pages": [
+              "indicators/fvg",
+              "indicators/htf-fvg",
+              "indicators/first-presented-fvg",
+              "indicators/first-presented-pro",
+              "indicators/bpr",
+              "indicators/unmitigated-imbalance"
+            ]
+          },
+          {
+            "group": "Order Blocks & Breakers",
+            "pages": [
+              "indicators/order-blocks",
+              "indicators/htf-order-blocks",
+              "indicators/breaker-blocks",
+              "indicators/rejection-blocks",
+              "indicators/rejection-blocks-pro",
+              "indicators/rb-pro-snippet",
+              "indicators/htf-rejection-blocks",
+              "indicators/htf-rejection-blocks-smt"
+            ]
+          },
+          {
+            "group": "Models & Setups",
+            "pages": [
+              "indicators/prophet-model",
+              "indicators/flow-state-model",
+              "indicators/cisd",
+              "indicators/crt",
+              "indicators/lrlr",
+              "indicators/smt-divergence",
+              "indicators/ssmt",
+              "indicators/turtle-soup"
+            ]
+          },
+          {
+            "group": "HTF Tools",
+            "pages": [
+              "indicators/htf-market-structure",
+              "indicators/htf-candles",
+              "indicators/htf-poi",
+              "indicators/ict-gradients"
+            ]
+          },
+          {
+            "group": "Sessions & Utilities",
+            "pages": [
+              "indicators/ict-killzones-macro",
+              "indicators/ict-liquidity-levels",
+              "indicators/inner-circle-toolkit",
+              "indicators/cpi-calculator"
+            ]
           }
         ]
       },
@@ -46,6 +101,24 @@
             "group": "DodgysDD",
             "pages": [
               "partners/dodgysdd/ifvg-ultimate"
+            ]
+          },
+          {
+            "group": "Triton Trades",
+            "pages": [
+              "partners/triton-trades/cisd-pro"
+            ]
+          },
+          {
+            "group": "AMERICANA",
+            "pages": [
+              "partners/americana/osok"
+            ]
+          },
+          {
+            "group": "ICTKESIK",
+            "pages": [
+              "partners/ictkesik/unicorn-model"
             ]
           }
         ]
