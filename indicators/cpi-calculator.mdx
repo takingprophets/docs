@@ -1,24 +1,166 @@
 ---
 title: "CPI/NFP Calculator"
-description: "A utility tool for calculating expected price moves based on CPI and NFP data releases."
+description: "Draws buy and sell stop levels around the pre-report price before high-impact news events like CPI and NFP."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-A utility tool for calculating expected price moves based on CPI and NFP data releases.
+**CPI/NFP Calculator** is a pre-news tool built for high-impact economic data releases — CPI, NFP, PPI, and similar events that trigger sharp initial moves at 8:30 AM ET. The concept is simple: in the minutes before a major release, price is sitting at an equilibrium. The actual report will push it significantly in one direction. The indicator draws a buy stop above the current price and a sell stop below it, representing the two potential breakout levels. When the data prints and price breaks through one level, you get a directional entry.
+
+The tool also includes a countdown timer that activates in the two-minute window before 8:30 AM and displays a visual warning on the chart. This is designed to keep you alert and ready as the release approaches, so you're not caught off guard when the move begins. Both the buy stop and sell stop levels update continuously with the current candle close, keeping the levels accurate as price drifts in the pre-news window. After 8:30 AM, the timer clears automatically.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General Settings
+
+**Enable** — toggle (default: on)
+
+Master switch for the entire indicator. Turning this off removes all drawings from the chart.
+
+---
+
+**Distance (points)** — float, step 0.25, min 0 (default: `30.0`)
+
+The number of points above and below the current price where the buy and sell stop levels are drawn. Buy stop = current price + distance. Sell stop = current price - distance. Set this to match the typical initial run on your instrument — for NQ, 30 points is a common starting point; for ES, 10–15 points may be more appropriate.
+
+---
+
+**Extend** — `Right` | `Both` | `None` (default: `None`)
+
+Controls whether the level lines extend beyond the current bar. `None` draws a short segment around the current candle — the default and most visual option for intraday use. `Right` extends the line forward. `Both` extends in both directions.
+
+---
+
+### Buy Stop
+
+**Enable** — toggle (default: on)
+
+Shows the buy stop level above price. Disable if you only want to track the downside.
+
+---
+
+**Color** — color picker (default: black)
+
+Color of the buy stop line and label.
+
+---
+
+**Width** — `Thin` | `Medium` | `Thick` (default: `Thin`)
+
+Line thickness for the buy stop level.
+
+---
+
+**Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Line style for the buy stop level.
+
+---
+
+**Label** — toggle (default: on)
+
+Shows a "Buy Stop" label at the level.
+
+---
+
+**Price** — toggle (default: on)
+
+When Label is on, appends the exact price value to the label text. Useful for knowing the trigger price without hovering.
+
+---
+
+**Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the buy stop label text.
+
+---
+
+### Sell Stop
+
+**Enable** — toggle (default: on)
+
+Shows the sell stop level below price.
+
+---
+
+**Color** — color picker (default: black)
+
+Color of the sell stop line and label.
+
+---
+
+**Width** — `Thin` | `Medium` | `Thick` (default: `Thin`)
+
+Line thickness.
+
+---
+
+**Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Line style.
+
+---
+
+**Label** — toggle (default: on)
+
+Shows a "Sell Stop" label at the level.
+
+---
+
+**Price** — toggle (default: on)
+
+Appends the exact price to the label.
+
+---
+
+**Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Label text size.
+
+---
+
+### Timer
+
+**Enable** — toggle (default: on)
+
+Activates the countdown clock that appears on the chart in the two minutes before 8:30 AM ET. The timer automatically stops and clears at 8:30.
+
+---
+
+**Window** — session time (default: `0828-0830`)
+
+The time window during which the countdown clock is active. The default is the two minutes immediately before the release. Adjust if you want the warning period to start earlier.
+
+---
+
+**Text** — string (default: `2 minute warning`)
+
+The text displayed in the warning banner at the top of the chart when the timer is active.
+
+---
+
+**Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Normal`)
+
+Size of the timer text.
+
+---
+
+**BG** — color picker (default: black, fully transparent)
+
+Background color of the timer warning banner.
+
+---
+
+**Text Color** — color picker (default: black)
+
+Color of the timer text.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+On CPI and NFP mornings, the team loads this indicator before 8:30 AM and sets the distance based on the expected move for the instrument. The buy and sell stops are placed and left to update automatically as price drifts. When 8:30 hits and the data prints, the team watches which level gets taken first — whichever side runs first defines the initial directional bias for the session.
+
+The real trade isn't always the first breakout — it's often the retracement back into the first-presented FVG after the initial spike. But the calculator tells you which direction is in play and gives you a clean reference for where price is targeting. The countdown timer adds discipline by signaling that you should already be positioned with your levels marked and your plan set before the release prints.

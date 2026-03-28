@@ -1,24 +1,220 @@
 ---
 title: "HTF Candles"
-description: "Renders higher timeframe candles directly on your current chart — letting you see the HTF price action without switching timeframes."
+description: "Renders higher-timeframe candles directly on your current chart with SMT divergence and live OHLC projection lines."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Renders higher timeframe candles directly on your current chart — letting you see the HTF price action without switching timeframes.
+**HTF Candles** displays higher-timeframe candle bodies and wicks directly on your execution chart, positioned to the right of the current price action. Instead of switching timeframes to see the context, you can read the HTF candle structure — open, high, low, close, wick — while staying on the 1-minute or 5-minute chart. This is particularly useful for reading CRT (Candle Range Theory) phases without losing granularity.
+
+The indicator renders up to 10 historical HTF candles plus the current forming one, adds an optional HTF close countdown timer, detects SMT divergences between your instrument and a correlated asset at HTF swing highs and lows, and draws horizontal projection lines for the current HTF candle's OHLC levels across the chart. An info box at the bottom of the screen shows the indicator name, current timeframe, symbol, and date.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### Info Box
+
+**Show Info Box** — toggle (default: on)
+
+Displays an info panel at the bottom center of the chart with the indicator name, timeframe, symbol, and date.
+
+---
+
+**Text Color** — color picker (default: black, 20% transparent)
+
+Color of the info box text.
+
+---
+
+### Timeframe Settings
+
+**Timeframe** — `1 MIN` through `1 MONTH` (default: `15 MIN`)
+
+The higher timeframe whose candles are rendered. Set to the timeframe you want to analyze while executing on a lower one.
+
+---
+
+### Display Settings
+
+**Number of HTF Candles** — `1` through `10` (default: `5`)
+
+How many completed HTF candles to display beside current price.
+
+---
+
+**Horizontal Offset** — integer, 1–50 (default: `10`)
+
+Bars to the right where the HTF candles are positioned. Increase if they overlap with live price.
+
+---
+
+**Candle Width** — `Narrow` | `Medium` | `Wide` | `Extra Wide` (default: `Medium`)
+
+Visual width of the candle bodies.
+
+---
+
+**Transparency** — `None` | `Low` | `Medium` | `High` | `Full` (default: `None`)
+
+Opacity of the candle fills.
+
+---
+
+**Show Time Label** — toggle (default: on)
+
+Displays the open time of each HTF candle below the body.
+
+---
+
+**Time Format** — `24 Hour` | `12 Hour` (default: `24 Hour`)
+
+Format for time labels.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` | `Huge` (default: `Small`)
+
+Size of the time label text.
+
+---
+
+**Show HTF Close Timer** — toggle (default: on)
+
+Shows a countdown until the current HTF candle closes.
+
+---
+
+### Visual Settings
+
+**Bullish Color** — color picker (default: green)
+
+Fill for bullish HTF candles.
+
+---
+
+**Bearish Color** — color picker (default: red)
+
+Fill for bearish HTF candles.
+
+---
+
+**Border Color** — color picker (default: black)
+
+Candle body border color.
+
+---
+
+**Wick Color** — color picker (default: black)
+
+Wick line color.
+
+---
+
+### Alert Settings
+
+**Enable Alerts** — toggle (default: on)
+
+Master toggle for all alerts in this indicator.
+
+---
+
+### SMT Settings
+
+**Enable SMT** — toggle (default: on)
+
+Detects SMT divergences between your instrument and the correlated asset at HTF swing points.
+
+---
+
+**Correlated Asset** — symbol (default: `CME_MINI:ES1!`)
+
+The correlated instrument. For NQ traders: leave as ES1!. For ES traders: change to NQ1!.
+
+---
+
+**SMT Color** — color picker (default: black)
+
+Color of SMT divergence lines.
+
+---
+
+**SMT Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Style of SMT lines.
+
+---
+
+**SMT Line Width** — `1` through `5` (default: `1`)
+
+Thickness of SMT lines.
+
+---
+
+**Enable SMT Alerts** — toggle (default: on)
+
+Fires an alert when SMT divergence is detected.
+
+---
+
+**Show SMT Labels** — toggle (default: on)
+
+Shows "SMT" labels at divergence points.
+
+---
+
+### Current Candle Projection Settings
+
+**Enable Projections** — toggle (default: on)
+
+Draws horizontal OHLC projection lines from the current HTF candle extending to the left.
+
+---
+
+**Left Extension (bars)** — integer, 0–50 (default: `8`)
+
+How far left the projection lines extend.
+
+---
+
+**Show Open / High / Low / Close Projection** — toggle each (all default: on)
+
+Individual toggles for each OHLC level.
+
+---
+
+**Open / High / Low / Close Color** — color pickers (all default: black)
+
+Individual colors for each projection line.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Style for projection lines.
+
+---
+
+**Line Width** — integer, 1–5 (default: `1`)
+
+Thickness of projection lines.
+
+---
+
+**Show Price Labels** — toggle (default: on)
+
+Displays exact prices next to projection lines.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` | `Huge` (default: `Small`)
+
+Size of price label text.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+HTF Candles is used in the same workflow as the CRT indicator — set to 15 minutes on a 1-minute chart to frame the three-candle intraday cycle. The close timer tells the team exactly how far into the current candle they are, which matters for timing entries: entries taken in the first third of the distribution candle have more room to run than entries taken near the close.
+
+The SMT detection at the HTF level is the key signal. When the 15-minute candle sweeps a high or low and the correlated asset does not confirm the new extreme, that SMT on the HTF candle is a high-conviction sign that the sweep is a manipulation — and the team enters on the first 1-minute pullback into an FVG or CISD level.

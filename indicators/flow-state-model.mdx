@@ -1,24 +1,170 @@
 ---
 title: "Flow State Model"
-description: "A momentum-based model that identifies high-probability continuation setups when price is in a clean directional flow."
+description: "Combines FVGs and CISD detection into a single overlay with a multi-timeframe checklist for identifying high-probability continuation setups."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-A momentum-based model that identifies high-probability continuation setups when price is in a clean directional flow.
+**Flow State Model** is an all-in-one framework indicator that surfaces the core elements of the TakingProphets trading model on a single chart. It combines Fair Value Gap detection, Change in State of Delivery (CISD) detection, multi-timeframe FVG analysis, and an interactive trade checklist into one overlay. The name reflects the goal: putting you in a flow state where every critical piece of information is visible at once, so execution feels natural rather than rushed.
+
+The indicator runs FVG detection using ATR-based sensitivity thresholds to filter out noise, gives you a configurable lookback period so your chart isn't overwhelmed with historical data, and overlays CISD markers whenever a liquidity sweep followed by displacement occurs. A table in the corner displays the current state of each checklist item — HTF PDA, aligned timeframe, liquidity sweep, SMT, and CISD — letting you check confluence at a glance before entering.
+
+Internally, the model also references the 4-hour, Daily, and Weekly FVGs to frame macro delivery context, though these are managed automatically without requiring manual timeframe switching.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General Settings
+
+**Detection Sensitivity** — `High` | `Medium` | `Low` (default: `Medium`)
+
+Controls how small an FVG needs to be to register. `High` catches very small gaps using a 0.2× ATR minimum. `Medium` requires 0.5× ATR — a reasonable filter that removes most noise. `Low` only shows large, impulsive gaps at 1.0× ATR. If you're seeing too many tiny gaps, move to `Low`. If valid setups are being missed, move to `High`.
+
+---
+
+**Lookback Period** — `1 Day` | `1 Week` | `1 Month` | `Max` (default: `1 Week`)
+
+How far back the indicator looks when drawing FVGs and CISDs. `1 Week` is the standard — it keeps the chart clean while providing enough historical reference. `Max` shows all available data and is best used for review sessions, not live trading.
+
+---
+
+### Fair Value Gaps
+
+**Show Fair Value Gaps** — toggle (default: on)
+
+Master toggle for all FVG drawings.
+
+---
+
+**Show Border** — toggle (default: on)
+
+Adds a border outline around each FVG box.
+
+---
+
+**Bullish FVG Color** — color picker (default: green, 90% transparent)
+
+Fill color for bullish FVGs.
+
+---
+
+**Bearish FVG Color** — color picker (default: red, 90% transparent)
+
+Fill color for bearish FVGs.
+
+---
+
+**FVG Label Size** — `Tiny` | `Small` | `Normal` (default: `Small`)
+
+Size of the FVG labels.
+
+---
+
+**FVG Label Color** — color picker (default: black)
+
+Color of the text inside FVG boxes.
+
+---
+
+### Change in State of Delivery
+
+**Show CISD** — toggle (default: on)
+
+Master toggle for CISD detection and drawing.
+
+---
+
+**CISD Line Color** — color picker (default: black)
+
+Color of CISD horizontal lines.
+
+---
+
+**CISD Label Color** — color picker (default: black)
+
+Color of CISD label text (`CISD+` / `CISD-`).
+
+---
+
+**CISD Label Size** — `Tiny` | `Small` | `Normal` (default: `Small`)
+
+Size of the CISD labels.
+
+---
+
+### Checklist Settings
+
+**Show Trade Checklist** — toggle (default: on)
+
+Displays the on-chart checklist table. The table shows each confluence item and whether it has been manually checked off.
+
+---
+
+**HTF PDA** — toggle (default: off)
+
+Adds an "HTF PDA" row to the checklist. Check this manually when you've confirmed price is delivering from a higher-timeframe Premium/Discount Array.
+
+---
+
+**ALIGNED TF** — toggle (default: off)
+
+Adds an "Aligned Timeframe" row. Check when a secondary timeframe confirms the same directional bias.
+
+---
+
+**Liquidity sweep** — toggle (default: off)
+
+Adds a "Liquidity Sweep" row. Check when a swing high/low has been taken before your setup.
+
+---
+
+**SMT** — toggle (default: off)
+
+Adds an "SMT" row. Check when the correlated asset confirms divergence at the sweep point.
+
+---
+
+**CISD** — toggle (default: off)
+
+Adds a "CISD" row. Check when the indicator has drawn a CISD at the setup level.
+
+---
+
+### Appearance
+
+**Table Text Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Normal`)
+
+Size of text in the checklist table.
+
+---
+
+**Table Header Background** — color picker (default: black, 70% transparent)
+
+Background color of the header row.
+
+---
+
+**Table Header Text** — color picker (default: white)
+
+Color of the header text.
+
+---
+
+**Table Text Normal** — color picker (default: white)
+
+Color of unchecked row text.
+
+---
+
+**Table Text Highlight** — color picker (default: yellow)
+
+Color of checked/highlighted row text.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The Flow State Model is the team's primary chart overlay during live sessions. On a 1-minute chart, it surfaces every CISD and FVG in real time so there's no manual marking needed. The checklist serves as a pre-trade discipline tool — before entering any setup, the team runs through the five items (HTF PDA, aligned timeframe, liquidity sweep, SMT, CISD) and only takes trades where at least three or four are confirmed.
+
+The CISD detections in particular are the entry trigger — when the model marks a CISD after a sweep, and the FVG from the same displacement zone is still unmitigated above or below, that's the setup. The checklist table in the corner keeps the analysis visible throughout the session without needing to look away from price.

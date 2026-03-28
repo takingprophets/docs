@@ -1,24 +1,122 @@
 ---
 title: "Rejection Block Pro+"
-description: "Enhanced rejection block detection with additional filters, grading, and visual options."
+description: "Multi-timeframe rejection block detection with quadrant-level gradient lines, HTF timeframe labels, and session-based alerts."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Enhanced rejection block detection with additional filters, grading, and visual options.
+**Rejection Block Pro+** is the full-featured version of the team's rejection block suite. It detects rejection blocks — zones formed by significant wick rejections at swing highs and lows — across the current timeframe and up to three higher timeframes, then draws each block with fully configurable quadrant-level gradient lines (0%, 25%, 50%, 75%, 100%). The quadrant display gives precise internal reference levels within each block for limit order placement.
+
+A rejection block marks the range between the candle body and the wick tip at a swing point. This zone represents where institutional orders rejected price strongly enough to leave a long wick, and it frequently acts as a re-entry or reaction point when price returns. The Pro+ version adds configurable swing strength sensitivity, per-side visibility limits, HTF timeframe labels inside each block, and session-based alerts for block formation and price entry.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Swing Strength** — `Sensitive` | `Normal` | `Strict` (default: `Normal`)
+
+Controls the pivot lookback for swing detection. `Sensitive` uses a tight lookback and detects more blocks; `Strict` requires more bars of confirmation and shows only the most significant rejections. `Normal` is the balanced default.
+
+---
+
+**Max Visible Per Side** — integer, 1–2 (default: `1`)
+
+The maximum number of rejection blocks displayed per side (bullish and bearish) per timeframe. Setting to `1` keeps only the most recent valid block visible per side. Increase to `2` to display the two most recent blocks simultaneously.
+
+---
+
+### Higher Timeframes
+
+**Show Current TF** — toggle (default: on)
+
+Enables rejection block detection and drawing on the current chart timeframe.
+
+---
+
+**HTF 1 / HTF 2 / HTF 3** — toggle + timeframe selector
+
+Three higher-timeframe slots. Each is off by default. Enable and set the timeframe to overlay rejection blocks from that timeframe on the current chart. Common pairings: 15m and 60m overlaid on a 1m execution chart.
+
+---
+
+**HTF Bullish Block Color** — color picker (per timeframe)
+
+Fill color for bullish rejection blocks from that timeframe.
+
+---
+
+**HTF Bearish Block Color** — color picker (per timeframe)
+
+Fill color for bearish rejection blocks from that timeframe.
+
+---
+
+**Show HTF Timeframe Label** — toggle (default: on)
+
+Displays the source timeframe inside each HTF rejection block so you can instantly distinguish which timeframe the block originated from.
+
+---
+
+**HTF Label Size** — `Tiny` | `Small` | `Normal`
+
+Size of the timeframe label text.
+
+---
+
+**HTF Label Color** — color picker
+
+Color of the timeframe label text.
+
+---
+
+### Visual
+
+**Remove Box Fill** — toggle (default: off)
+
+When on, removes the box fill and shows only the quadrant lines and border. Useful for a less visually heavy chart.
+
+---
+
+**Show Quadrants** — toggle (default: on)
+
+Shows the internal 0%, 25%, 50%, 75%, and 100% quadrant level lines within each rejection block.
+
+---
+
+**0% / 25% / 50% / 75% / 100%** — per-level: toggle, color, style, width, label
+
+Each quadrant level is independently configurable. Toggle visibility, set a unique color, choose `Solid`, `Dashed`, or `Dotted` line style, adjust width, and enable or disable the percentage label. The 50% level is typically the primary limit entry target.
+
+---
+
+### Alerts
+
+**Enable Alerts** — toggle (default: on)
+
+Master toggle for all alerts.
+
+---
+
+**Session 1 / 2 / 3** — toggle + session time
+
+Alert windows. Session 1 defaults to `0930-1600` and is on. Sessions 2 and 3 are off. Alerts only fire within enabled session windows.
+
+---
+
+**Alert on Block Form** — toggle + message (default: on, `A rejection block has formed.`)
+
+Fires when a new rejection block is detected.
+
+---
+
+**Alert on Block Entry** — toggle + message (default: on, `Price has entered a rejection block.`)
+
+Fires when price enters an existing, unmitigated rejection block.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+Rejection Block Pro+ is the team's primary rejection block tool for intraday sessions. HTF1 is set to 15m and HTF2 to 60m when trading on a 1-minute execution chart. The block entry alert draws immediate attention when price retraces into a higher-timeframe rejection zone during the NY AM session. The 50% quadrant line inside each block is the default limit order entry point, and the wick tip (100% or 0% depending on direction) is the invalidation level for the stop. The combination of a block entry alert plus a 1-minute CISD inside the zone is the team's standard Pro+ trigger.

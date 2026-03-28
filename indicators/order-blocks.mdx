@@ -1,24 +1,70 @@
 ---
 title: "Order Blocks"
-description: "Automatically detects and draws order blocks — the last opposing candle before an impulsive move that leaves a Fair Value Gap."
+description: "Detects and draws order blocks and breaker blocks — the last opposing candle before an impulsive institutional move, and the zones formed when those blocks are violated."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Automatically detects and draws order blocks — the last opposing candle before an impulsive move that leaves a Fair Value Gap.
+**Order Blocks** identifies two complementary ICT concepts: order blocks and breaker blocks. An order block is the last bearish candle before a bullish impulsive move (bullish OB) or the last bullish candle before a bearish impulsive move (bearish OB). These zones represent where institutional buy or sell orders were placed to initiate the move, and price frequently returns to them for continuation entries.
+
+A breaker block forms when an order block is subsequently violated — the institutional orders that defined it have been broken, and the zone "flips" to act as resistance (former support broken) or support (former resistance broken). Breaker blocks are often the cleaner re-entry zones after a liquidity sweep because they mark the precise level where the prior institutional order flow was exhausted.
+
+The indicator draws each block as a colored zone and optionally shows breaker blocks in a separate color when they form.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+**OB Sensitivity** — `High` | `Medium` | `Low` (default: `Medium`)
+
+Controls the detection threshold for order block qualification. `High` detects more order blocks with looser criteria; `Low` detects fewer but more structurally significant blocks. `Medium` is the balanced default for most timeframes.
+
+---
+
+**Bearish OB Color** — color picker
+
+Fill color for bearish order block zones.
+
+---
+
+**Bullish OB Color** — color picker
+
+Fill color for bullish order block zones.
+
+---
+
+**Show Border** — toggle
+
+Adds a border outline around each order block zone.
+
+---
+
+### Breaker Blocks
+
+**Show Breakers** — toggle
+
+Enables detection and drawing of breaker blocks — order blocks that have been violated and flipped.
+
+---
+
+**Bearish Breaker Color** — color picker
+
+Fill color for bearish breaker block zones.
+
+---
+
+**Bullish Breaker Color** — color picker
+
+Fill color for bullish breaker block zones.
+
+---
+
+**Breaker Border** — toggle
+
+Adds a border outline around each breaker block zone.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+Order Blocks is the team's standard order block reference overlay. The sensitivity setting is kept at `Medium` for daily use — `High` generates too much noise on fast 1-minute charts, and `Low` misses many valid intraday blocks. Breaker blocks are enabled and watched carefully: when a bullish order block is broken to the downside, the resulting bearish breaker is often the exact re-entry zone for shorts if price returns to it. The combination of an order block entry aligned with a Fair Value Gap or CISD on the same level is the highest-conviction setup.

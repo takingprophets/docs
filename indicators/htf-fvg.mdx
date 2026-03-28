@@ -1,24 +1,104 @@
 ---
 title: "HTF Fair Value Gap"
-description: "Plots Fair Value Gaps from higher timeframes directly on your current chart for multi-timeframe confluence."
+description: "Draws Fair Value Gaps from up to five higher timeframes directly on your current chart for multi-timeframe confluence."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Plots Fair Value Gaps from higher timeframes directly on your current chart for multi-timeframe confluence.
+**HTF FVG** is a multi-timeframe Fair Value Gap overlay that pulls FVGs from up to five separate higher timeframes and displays them all on your current chart simultaneously. Rather than switching between timeframes to check where HTF gaps sit, you can see all of them at once on your execution chart — making it immediately clear when price is approaching or delivering from a higher-timeframe imbalance.
+
+The indicator supports up to five independently configurable timeframes (HTF1 through HTF5), each with its own bullish and bearish colors. FVGs are filtered by an ATR-based sensitivity setting to remove trivially small gaps, and a lookback period controls how far back gaps are sourced. A configurable padding setting controls the horizontal distance between the current candle and where HTF FVG boxes are rendered, and a spacing setting separates overlapping timeframe boxes vertically.
+
+An optional Consequent Encroachment line marks the 50% midpoint of each gap, and label settings control how timeframe labels appear inside each box.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Detection Sensitivity** — `High` | `Medium` | `Low` (default: `Medium`)
+
+Sets the ATR-based minimum size for a gap to register. `High` catches small gaps (0.2× ATR), `Medium` is the standard (0.5× ATR), and `Low` shows only large impulsive gaps (1.0× ATR). Adjust if you're seeing too many irrelevant gaps or missing significant ones.
+
+---
+
+**Lookback Period** — `1 Day` | `1 Week` | `1 Month` | `Max` (default: `1 Week`)
+
+How far back the indicator scans for unmitigated FVGs on each timeframe. `1 Week` is suitable for intraday trading. `Max` is for review sessions.
+
+---
+
+**Show Consequent Encroachment** — toggle (default: off)
+
+Draws a dashed line at the 50% midpoint of each HTF FVG. Turn on when you want precise entry levels within each gap.
+
+---
+
+**Extend HTF FVGs by X bars** — integer, min 0 (default: `10`)
+
+How many bars to the right of the current candle each HTF FVG box extends. This makes the boxes visible further into the future as a forward reference. Set to 0 to cap boxes at the current candle.
+
+---
+
+### HTF1 through HTF5
+
+Each timeframe block has three settings:
+
+**Show HTFn** — toggle
+
+Enables or disables that timeframe's FVGs entirely.
+
+**Timeframe** — timeframe selector
+
+The source timeframe for that slot. HTF1 defaults to `5`, HTF2 to `15`, HTF3 to `60`, HTF4 to `D` (off), HTF5 to `W` (off).
+
+**Bullish / Bearish** — color pickers
+
+Fill colors for bullish and bearish FVGs from that timeframe. Default is green (90% transparent) for bullish and red (90% transparent) for bearish across all timeframes.
+
+---
+
+### Appearance
+
+**Label Text Color** — color picker (default: black)
+
+Color of text labels inside the HTF FVG boxes.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of label text inside boxes.
+
+---
+
+**CE Line Color** — color picker (default: black)
+
+Color of the Consequent Encroachment lines (when enabled).
+
+---
+
+**Show Border** — toggle (default: off)
+
+Adds a border outline around each FVG box.
+
+---
+
+**Distance from current candle** — integer, min 0 (default: `4`)
+
+Horizontal padding (in bars) between the current candle and the start of HTF FVG boxes. This prevents overlap with live price action.
+
+---
+
+**Spacing between timeframes** — integer, min 0 (default: `6`)
+
+Vertical gap (in bars) between overlapping FVG boxes from different timeframes. Increase if boxes from multiple timeframes are visually stacking on top of each other.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+HTF FVG is the team's primary PDA reference tool. On a 1-minute chart, HTF1 is set to 5 minutes, HTF2 to 15 minutes, and HTF3 to 60 minutes. When price sweeps a liquidity level and begins to pull back, the team checks which HTF FVG is closest — that zone becomes the primary draw target and the area where entries are timed.
+
+The most reliable setups form when a 1-minute CISD or FVG sits inside or at the edge of an HTF FVG. The overlap between timeframes means multiple sets of institutional orders are clustered in the same area, making the reaction more predictable. The CE line on the HTF gap is often the specific price where limit orders are placed for the cleanest risk-to-reward.

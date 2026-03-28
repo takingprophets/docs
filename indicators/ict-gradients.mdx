@@ -1,24 +1,130 @@
 ---
 title: "ICT Gradients"
-description: "Visualizes ICT-based gradient zones on the chart — premium and discount areas derived from the current trading range."
+description: "Displays gradient levels for the key ICT PD Arrays — ORG, NDOG, NWOG, and Daily FVGs — with configurable per-level styling."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Visualizes ICT-based gradient zones on the chart — premium and discount areas derived from the current trading range.
+**ICT Gradients** is a PD Array (Premium/Discount Array) reference tool that draws gradient levels for the four most important ICT opening gap concepts: the Opening Range Gap (ORG), New Day Opening Gap (NDOG), New Week Opening Gap (NWOG), and Daily Fair Value Gaps (D-FVG). For each active PD Array, the indicator draws the full gap as a box and overlays horizontal lines at the 0%, 25%, 50%, 75%, and 100% internal levels — giving you precise draw targets within each gap.
+
+The underlying concept is that institutional price delivery is structured. Within any gap, price tends to draw toward specific internal reference points before either continuing through or reversing. The 50% CE level is the most commonly respected, but the 0% and 100% (gap edges) are significant as well. By showing all five levels simultaneously, the indicator gives traders a complete roadmap of the potential delivery path within each PD Array.
+
+The indicator selects which PD Arrays to display by proximity: when multiple ORGs, NDOGs, NWOGs, or D-FVGs are available, it shows the ones closest to the current price (up to a configurable count of 1, 2, or 3 per type). Each array type has fully independent color and style settings so you can distinguish them at a glance.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Enable** — toggle (default: on)
+
+Master switch for the entire indicator.
+
+---
+
+**IPDA lookback (days)** — `180` | `120` | `60` | `40` | `20` (default: `180`)
+
+The lookback window for sourcing PD Arrays. This corresponds to ICT's IPDA (Interbank Price Delivery Algorithm) look-back periods. `180` days is the standard full lookback. Use shorter periods if you want to focus only on recent PD Arrays.
+
+---
+
+**Show date in labels** — toggle (default: off)
+
+Prefixes each gradient label with the formation date in M/D format. For example: `2/17 ORG 50%`. Useful when tracking multiple historical PD Arrays to know when they formed.
+
+---
+
+### PD Arrays
+
+**Opening Range Gaps (ORG)** — toggle + count `1` | `2` | `3` (default: on, `1`)
+
+Shows the gap between the previous day's close and the 9:30 AM open. The count selector controls how many ORGs to display simultaneously, selected by proximity to the current 50% level.
+
+---
+
+**New Day Opening Gaps (NDOG)** — toggle + count `1` | `2` | `3` (default: on, `1`)
+
+Shows overnight opening gaps — the gap between the 5 PM close and the 6 PM reopen. NDOGs form daily and are frequent draw targets in futures markets.
+
+---
+
+**New Week Opening Gaps (NWOG)** — toggle + count `1` | `2` | `3` (default: on, `1`)
+
+Shows the gap between Friday's close and Sunday's/Monday's open. NWOGs are weekly-scale targets.
+
+---
+
+**Daily Fair Value Gaps (D-FVG)** — toggle + count `1` | `2` | `3` (default: on, `1`)
+
+Shows active FVGs detected on the Daily timeframe. These are major draw targets for multi-day delivery.
+
+---
+
+### ORG Style
+
+**Box** — color picker (default: red, fully opaque)
+
+Color for the ORG box and gradient lines.
+
+---
+
+**No fill** — toggle (default: off)
+
+Removes the box fill, leaving only the gradient lines visible.
+
+---
+
+**Border** — toggle (default: off)
+
+Shows a border on the ORG box.
+
+---
+
+**Gradients** — toggle (default: on)
+
+Shows the 0%/25%/50%/75%/100% gradient level lines.
+
+---
+
+**Labels** — toggle (default: on)
+
+Shows percentage labels next to each line.
+
+---
+
+**Label Color** — color picker (default: red, fully opaque)
+
+Color of the gradient labels.
+
+---
+
+**0% / 25% / 50% / 75% / 100%** — per-level: toggle, color, style, width
+
+Each gradient level is individually configurable. All default to dotted, thin lines in the ORG color.
+
+---
+
+### NDOG Style
+
+Identical structure to ORG Style. Default color is blue for all NDOG elements.
+
+---
+
+### NWOG Style
+
+Identical structure to ORG Style. Default color is orange for all NWOG elements.
+
+---
+
+### D-FVG Style
+
+Identical structure to ORG Style. Default color is gray for all D-FVG elements.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+ICT Gradients is the team's primary daily bias tool. Before the session opens, the team identifies which PD Arrays are closest to the overnight price and marks the key gradient levels. During the AM session, the 50% level of the ORG is treated as the primary reference — it's the daily equilibrium point. Price above the ORG 50% suggests bullish delivery; price below suggests bearish.
+
+The most powerful confluence is when a lower-timeframe CISD or first-presented FVG forms right at an ORG or NDOG gradient level. That precise overlap between the ICT Gradients reference and the lower-timeframe entry tool is the setup the team looks for every session. The date labels help in review sessions to verify which historical PD Arrays have been respected and which have been violated.

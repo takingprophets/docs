@@ -1,24 +1,60 @@
 ---
 title: "LRLR"
-description: "Marks Last Rally / Last Run levels — key liquidity reference points derived from the most recent swing structure."
+description: "Detects Lower Relative Highs and Lower Relative Lows trendline sequences, validated by FVG alignment, as directional bias tools."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Marks Last Rally / Last Run levels — key liquidity reference points derived from the most recent swing structure.
+**LRLR** (Lower Relative Lows / Lower Relative Highs) detects structured trendline sequences where swing highs are progressively declining (buyside LRLR) or swing lows are progressively declining (sellside LRLR). Each sequence requires a minimum number of qualifying swings, and the trendline is only drawn when no opposing Fair Value Gap invalidates the structure. This FVG-validation step is the key differentiator: a sequence of lower highs broken by a bullish FVG is not a valid bearish LRLR.
+
+Buyside LRLR trendlines connect ascending swing highs — a sequence of higher highs that defines where buyside liquidity is building. Sellside LRLR trendlines connect descending swing lows — a sequence of lower lows that marks accumulating sellside liquidity. Together, they give a continuous structural picture of which side of the market is under institutional pressure.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+**Show Labels** — toggle (default: on)
+
+Displays text labels at each detected LRLR trendline.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the trendline labels.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Solid`)
+
+Style of the LRLR trendlines.
+
+---
+
+**Swing Lookback** — integer, 1–10 (default: `1`)
+
+The pivot lookback for swing detection. A value of 1 means a swing high only needs to be the highest high relative to its immediately adjacent bars. Increase for fewer but more structurally significant swings.
+
+---
+
+**Min Swings** — integer, 3–10 (default: `4`)
+
+The minimum number of qualifying swings required before an LRLR trendline is drawn. Requires at least 4 swings by default to reduce false positives from short, two-point sequences.
+
+---
+
+**Buyside LRLR Color** — color picker (default: blue)
+
+Color of buyside LRLR trendlines — the ascending swing high sequences where buy-stop liquidity is accumulating above price.
+
+---
+
+**Sellside LRLR Color** — color picker (default: red)
+
+Color of sellside LRLR trendlines — the descending swing low sequences where sell-stop liquidity is accumulating below price.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+LRLR is used as a directional bias filter during the pre-session analysis. A confirmed sellside LRLR — a sequence of four or more lower lows without an intervening bullish FVG — is a bearish structural signal: the team looks for short entries targeting the next lower low. A buyside LRLR is the inverse. The FVG-validation requirement is what gives this indicator signal quality; a simple sequence of lower highs interrupted by an unmitigated bullish FVG is structurally compromised and won't be drawn. The Swing Lookback of 1 is the standard for 1-minute execution charts where every swing point matters.

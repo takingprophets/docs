@@ -1,24 +1,48 @@
 ---
 title: "Balanced Price Range"
-description: "Detects and draws Balanced Price Ranges — overlapping bullish and bearish Fair Value Gaps that act as magnet zones for price."
+description: "Identifies and draws the overlapping area between two opposing Fair Value Gaps — a Balanced Price Range."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Detects and draws Balanced Price Ranges — overlapping bullish and bearish Fair Value Gaps that act as magnet zones for price.
+A **Balanced Price Range (BPR)** is a specific price zone formed when two opposing Fair Value Gaps overlap. A bullish FVG sits below and a bearish FVG sits above, and where their price ranges intersect, you get the BPR — a zone of equilibrium where both buy-side and sell-side imbalances have been partially addressed by the market.
+
+The concept behind a BPR is that institutions filled orders in both directions within a relatively tight range. This creates a congested zone that price frequently respects, either as support on a retest from above or as resistance on a retest from below. Because both sides of the market have imbalances in the same area, the BPR is considered a higher-quality re-entry zone than a standalone FVG.
+
+This indicator automatically detects when a new FVG forms opposite to a recent one and calculates the overlapping zone. It draws a single box at that overlap region. When the BPR is mitigated — meaning price trades through the zone — the box either disappears (if Show Mitigated is off) or fades out to indicate it has been traded through. Only the most recently formed BPR in each direction is tracked at any given time.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+**Show Mitigated BPR** — toggle (default: on)
+
+When on, a BPR that has been traded through remains visible on the chart but fades significantly in color to indicate it's been mitigated. When off, mitigated BPRs are deleted immediately. Turn off for a cleaner chart that only shows active, unmitigated zones.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the "BPR" label displayed inside the box. Reduce to `Tiny` if you're on lower timeframes with small price ranges and the label looks crowded.
+
+---
+
+**Bearish BPR Color** — color picker (default: red, 70% transparent)
+
+Fill color for bearish BPRs — zones where the overlapping FVGs indicate a bearish imbalance context.
+
+---
+
+**Bullish BPR Color** — color picker (default: green, 70% transparent)
+
+Fill color for bullish BPRs — zones where the overlap sits in a bullish imbalance context.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The BPR is used as a precision re-entry zone during the live session. After a displacement move creates a clear directional bias, the team looks for price to retrace into the BPR rather than chasing the move. Because both FVGs that form the BPR represent unfilled institutional orders, the zone attracts price reliably.
+
+The practical workflow is to wait for a sweep of a liquidity level (session high, swing high, etc.), watch for the displacement that creates the BPR, then set a limit order inside the zone — often at the CE of the BPR itself. The label makes it easy to spot the zone at a glance without having to mentally calculate the overlap between two FVGs.
+
+BPRs work best on the 1-minute and 5-minute charts during the AM and PM sessions when volume is active and price is making clean displacement moves.

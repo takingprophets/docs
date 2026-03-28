@@ -1,24 +1,216 @@
 ---
 title: "First Presented FVG Pro+"
-description: "Enhanced version of the First Presented FVG with additional filters and entry confluences."
+description: "Enhanced version of the First Presented FVG with multi-gap memory, alert windows, and a configurable gap count per session."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Enhanced version of the First Presented FVG with additional filters and entry confluences.
+**First Presented FVG Pro+** is the upgraded version of the First Presented FVG indicator. It builds on the same core concept — identifying the first Fair Value Gap that forms in the AM session (9:32–10:00 AM ET) and PM session (1:32–2:00 PM ET) — but adds the ability to store and display multiple gaps per session, configure alert windows, and independently control gap count per session.
+
+While the standard First Presented FVG shows only a single gap per session, the Pro+ version can remember up to five AM gaps and five PM gaps, displaying the most relevant ones based on proximity to current price. This is useful when you want to track not just the absolute first gap but the initial cluster of gaps that formed at the session open — all of which carry the "first presented" significance.
+
+The indicator also includes the **Opening Range Gap (ORG)** overlay with full gradient level controls, identical to the standard version. And it adds a comprehensive alert system with configurable session windows, letting you receive notifications when price closes inside an AM or PM gap during your active trading hours.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General Settings
+
+**Only show current day gaps** — toggle (default: off)
+
+When off, gaps from prior days are kept on the chart (classic behavior). When on, all gaps reset at 9:30 AM each day. Pair the "off" setting with the "Gaps to show" dropdown to control how many historical gaps remain visible.
+
+---
+
+**Enable AM gaps** — toggle (default: on)
+
+Enables detection and drawing of AM session first-presented FVGs.
+
+---
+
+**Enable PM gaps** — toggle (default: on)
+
+Enables detection and drawing of PM session first-presented FVGs.
+
+---
+
+**Enable ORG** — toggle (default: on)
+
+Shows the Opening Range Gap with gradient levels.
+
+---
+
+### AM Gaps
+
+**Gaps to show** — `1` | `2` | `3` | `4` | `5` (default: `5`)
+
+How many AM gaps to keep visible on the chart at once. The indicator stores up to 5 gaps per session and selects the most recently formed ones to display. Set to `1` if you want strictly the first gap only.
+
+---
+
+**Color** — color picker (default: red, 50% transparent)
+
+Fill color for AM FVG boxes.
+
+---
+
+**Label** — toggle (default: on)
+
+Shows a label on each AM gap.
+
+---
+
+**Label Color** — color picker (default: black)
+
+Color of the AM label text.
+
+---
+
+**Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the AM label text.
+
+---
+
+**Time** — toggle (default: on)
+
+Includes the formation time in each AM gap label.
+
+---
+
+**Date** — toggle (default: on)
+
+Includes the formation date in each AM gap label.
+
+---
+
+**CE** — toggle (default: on)
+
+Draws the 50% CE level on each AM gap.
+
+---
+
+**CE Color** — color picker (default: black)
+
+Color of the CE lines.
+
+---
+
+**CE Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Style of the CE lines.
+
+---
+
+### PM Gaps
+
+**Gaps to show** — `1` | `2` | `3` | `4` | `5` (default: `5`)
+
+How many PM gaps to keep visible on the chart.
+
+---
+
+**Color** — color picker (default: blue, 50% transparent)
+
+Fill color for PM FVG boxes.
+
+---
+
+**Label** — toggle (default: on)
+
+Shows a label on each PM gap.
+
+---
+
+**Label Color** — color picker (default: black)
+
+Color of the PM label text.
+
+---
+
+**Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the PM label text.
+
+---
+
+**Time** — toggle (default: on)
+
+Includes the formation time in PM labels.
+
+---
+
+**Date** — toggle (default: on)
+
+Includes the formation date in PM labels.
+
+---
+
+**CE** — toggle (default: on)
+
+Draws CE lines on PM gaps.
+
+---
+
+**CE Color** — color picker (default: black)
+
+Color of the PM CE lines.
+
+---
+
+**CE Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Style of the PM CE lines.
+
+---
+
+### ORG Style
+
+The ORG settings are identical to the First Presented FVG standard version — box color, fill toggle, border toggle, gradient toggles, and individual per-level controls for 0%, 25%, 50%, 75%, and 100%.
+
+---
+
+### Alerts
+
+**Enable Alerts** — toggle (default: on)
+
+Master toggle. No alerts fire when this is off.
+
+---
+
+**Window 1** — toggle + session time (default: on, `0930-1600`)
+
+The primary alert session window — alerts only fire during this time range. Default covers the NY cash session.
+
+---
+
+**Window 2** — toggle + session time (default: off, `2000-0000`)
+
+Secondary alert window for overnight/Asian session trading.
+
+---
+
+**Window 3** — toggle + session time (default: off, `0200-0500`)
+
+Third alert window for London session trading.
+
+---
+
+**AM close in gap** — toggle + message (default: on, `AM gap: candle closed inside a visible gap.`)
+
+Fires when a candle closes inside any visible AM gap. Useful for getting notified when price returns to an AM first-presented zone.
+
+---
+
+**PM close in gap** — toggle + message (default: on, `PM gap: candle closed inside a visible gap.`)
+
+Fires when a candle closes inside any visible PM gap.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The Pro+ version is the preferred setup for live sessions because of the multi-gap memory. During a busy AM session, several FVGs can form in rapid succession in the first 30 minutes. The Pro+ keeps all of them visible, letting the team track which ones have been retested and which remain fresh targets. Setting "Gaps to show" to 3 or 4 balances coverage without cluttering the chart.
+
+The alert system is particularly valuable for PM session trading — set Window 1 to `1330-1600`, enable "PM close in gap," and let the indicator notify you when price enters a PM first-presented zone so you can focus on execution rather than monitoring.

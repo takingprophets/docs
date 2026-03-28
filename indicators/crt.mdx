@@ -1,24 +1,228 @@
 ---
 title: "CRT"
-description: "Identifies the Candle Range Theory pattern — a setup based on the relationship between candle bodies and wicks across specific time windows."
+description: "Renders higher-timeframe candles directly on your chart with SMT divergence detection and live OHLC projection lines."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Identifies the Candle Range Theory pattern — a setup based on the relationship between candle bodies and wicks across specific time windows.
+**CRT** stands for Candle Range Theory — an ICT concept based on reading the three-candle pattern of a higher-timeframe candle: the setup candle (before), the manipulation candle (the one that sweeps liquidity), and the distribution candle (which delivers price in the intended direction). Understanding which phase of this three-candle structure you're in gives context for where price is likely to move next within the HTF candle's range.
+
+This indicator renders higher-timeframe candles directly on your chart as visual overlays, positioned to the right of current price action. Rather than switching timeframes, you can see the HTF candle structure while staying on your execution timeframe. The indicator shows recent completed HTF candles plus the current forming one, draws their open/high/low/close as horizontal projection lines, and detects SMT divergences between your instrument and a correlated asset at the HTF swing highs and lows.
+
+A live countdown timer shows how long until the current HTF candle closes. An info box at the bottom of the chart shows the indicator name, timeframe, symbol, and date for quick reference.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### Info Box
+
+**Show Info Box** — toggle (default: on)
+
+Displays a small table at the bottom center showing the indicator name, timeframe, symbol, and current date.
+
+---
+
+**Text Color** — color picker (default: black, 20% transparent)
+
+Color of the info box text.
+
+---
+
+### Timeframe Settings
+
+**Timeframe** — `1 MIN` through `1 MONTH` (default: `15 MIN`)
+
+The higher timeframe used to render the CRT candles. For 1-minute execution, 15 minutes gives you the intraday CRT cycle. For swing trading context, 4-hour or daily provides the macro structure.
+
+---
+
+### Display Settings
+
+**Horizontal Offset** — integer, 1–50 (default: `10`)
+
+How many bars to the right of current price the HTF candles are placed. Increase if the candles overlap with live action.
+
+---
+
+**Number of HTF Candles** — `1` through `10` (default: `5`)
+
+How many completed HTF candles to display. More candles give historical context; fewer reduce visual noise.
+
+---
+
+**Candle Width** — `Narrow` | `Medium` | `Wide` | `Extra Wide` (default: `Medium`)
+
+Visual width of the rendered HTF candle bodies.
+
+---
+
+**Transparency** — `None` | `Low` | `Medium` | `High` | `Full` (default: `None`)
+
+Opacity of the candle fills. Use `Medium` or `High` when the HTF candles overlap other chart elements.
+
+---
+
+**Show Time Label** — toggle (default: on)
+
+Displays the open time of each HTF candle beneath the body.
+
+---
+
+**Time Format** — `24 Hour` | `12 Hour` (default: `24 Hour`)
+
+Format for the time labels.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` | `Huge` (default: `Small`)
+
+Size of the time label text.
+
+---
+
+**Show HTF Close Timer** — toggle (default: on)
+
+Displays a live countdown showing how many minutes and seconds remain until the current HTF candle closes.
+
+---
+
+### Visual Settings
+
+**Bullish Color** — color picker (default: green)
+
+Fill color for bullish HTF candles.
+
+---
+
+**Bearish Color** — color picker (default: red)
+
+Fill color for bearish HTF candles.
+
+---
+
+**Border Color** — color picker (default: black)
+
+Color of the candle body border.
+
+---
+
+**Wick Color** — color picker (default: black)
+
+Color of the wicks.
+
+---
+
+### Alert Settings
+
+**Enable Alerts** — toggle (default: on)
+
+Master toggle for CRT-related alerts.
+
+---
+
+**Alert on CRT** — toggle + message (default: on, `CRT detected.`)
+
+Fires when a new three-candle CRT pattern is confirmed on the selected HTF.
+
+---
+
+### SMT Settings
+
+**Enable SMT** — toggle (default: on)
+
+Activates SMT divergence detection. The indicator compares swing highs and lows on your instrument against the correlated asset and draws a line at the divergence when one makes a new extreme and the other does not.
+
+---
+
+**Correlated Asset** — symbol (default: `CME_MINI:ES1!`)
+
+The correlated instrument for SMT detection. Change to `CME_MINI:NQ1!` when trading ES, and keep as ES1! when trading NQ.
+
+---
+
+**SMT Color** — color picker (default: black)
+
+Color of the SMT divergence line.
+
+---
+
+**SMT Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Visual style of the SMT line.
+
+---
+
+**SMT Line Width** — `1` through `5` (default: `1`)
+
+Thickness of the SMT line.
+
+---
+
+**Enable SMT Alerts** — toggle (default: on)
+
+Fires an alert when SMT divergence is detected at the HTF level.
+
+---
+
+**Show SMT Labels** — toggle (default: on)
+
+Displays "SMT" text at divergence points.
+
+---
+
+### Current Candle Projection Settings
+
+**Enable Projections** — toggle (default: on)
+
+Draws horizontal lines from the current HTF candle's OHLC levels extending left across the chart, showing where these key prices are relative to current action.
+
+---
+
+**Left Extension (bars)** — integer, 0–50 (default: `8`)
+
+How many bars to the left the projection lines extend.
+
+---
+
+**Show Open / High / Low / Close Projection** — toggle each (all default: on)
+
+Individual toggles for each OHLC level. Disable any that aren't relevant to your trading approach.
+
+---
+
+**Open / High / Low / Close Color** — color pickers (all default: black)
+
+Individual color for each projection line.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Style for all projection lines.
+
+---
+
+**Line Width** — integer, 1–5 (default: `1`)
+
+Thickness of projection lines.
+
+---
+
+**Show Price Labels** — toggle (default: on)
+
+Displays the exact price next to each projection line.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` | `Huge` (default: `Small`)
+
+Size of the price label text.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+During live sessions, CRT is set to the 15-minute timeframe on a 1-minute execution chart. This gives a clear picture of which candle in the 15-minute cycle you're currently in. The manipulation candle — the one sweeping the prior setup candle's high or low — is where the team looks for entries. Once the manipulation is confirmed via a sweep and SMT divergence on the correlated asset, the distribution candle begins and the team enters on a pullback.
+
+The projection lines are particularly useful for identifying when price is approaching the HTF candle's 50% level, open, or prior high/low — all of which act as natural reaction points. The SMT divergence on the CRT candle's swing is one of the strongest entry signals the team uses in the AM session.

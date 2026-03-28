@@ -1,24 +1,100 @@
 ---
 title: "HTF Order Blocks"
-description: "Draws order blocks from higher timeframes on your current chart — identifying institutional supply and demand zones."
+description: "Draws order blocks and optional breaker blocks from up to five higher timeframes directly on your current chart."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Draws order blocks from higher timeframes on your current chart — identifying institutional supply and demand zones.
+**HTF Order Blocks** detects and draws institutional order blocks from multiple higher timeframes and overlays them on your current chart. An order block is the last bearish candle before a bullish impulsive move, or the last bullish candle before a bearish impulsive move — representing the price level where institutional orders were originally placed. These zones frequently attract price on retests.
+
+The indicator detects order blocks across up to six configurable timeframes (current timeframe + five HTF slots) using ATR-based sensitivity filtering to ensure only significant blocks are drawn. When an order block is violated — price closes through it in the opposite direction — it can optionally convert to a breaker block, which is then drawn in a lighter color to indicate the flip.
+
+Each OB is drawn as a labeled box with the timeframe and direction noted. A volume bar inside the box (optional) shows relative volume at the time the OB formed. The indicator is built for multi-timeframe confluence: when a current-timeframe entry setup aligns with an HTF OB, it significantly increases the probability of the zone holding.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**OB Detection Sensitivity** — `High` | `Medium` | `Low` (default: `Medium`)
+
+ATR-based filter for order block size. `High` (0.2× ATR) catches most blocks. `Medium` (0.5× ATR) filters small ones. `Low` (1.0× ATR) only shows large, significant blocks. Adjust based on how many blocks you're comfortable tracking.
+
+---
+
+**Maximum Lookback** — `1 Day` | `1 Week` | `1 Month` | `Max` (default: `1 Week`)
+
+How far back order blocks are sourced. Older blocks are typically less relevant intraday; use `1 Week` for clean charts.
+
+---
+
+**Show Breaker Blocks** — toggle (default: off)
+
+When on, OBs that have been violated (price closes through them) are converted to breaker blocks and continue to display in a lighter shade. Disable if you only want to see active, unmitigated OBs.
+
+---
+
+### Timeframes
+
+**Show Current Timeframe** — toggle (default: on)
+
+Enables order block detection on the chart's current timeframe.
+
+---
+
+**Show HTF 1 through HTF 5** — toggle + timeframe selector (each)
+
+Five independently configurable higher timeframe slots. Each can be enabled or disabled and set to any timeframe. Defaults are blank (auto-select based on current chart timeframe).
+
+---
+
+### Appearance
+
+**Bearish OB Color** — color picker (default: red, 80% transparent)
+
+Fill for bearish order blocks.
+
+---
+
+**Bullish OB Color** — color picker (default: teal, 80% transparent)
+
+Fill for bullish order blocks.
+
+---
+
+**Bearish Breaker Color** — color picker (default: red, 40% transparent)
+
+Fill for bearish breaker blocks (more opaque than OBs to differentiate).
+
+---
+
+**Bullish Breaker Color** — color picker (default: teal, 40% transparent)
+
+Fill for bullish breaker blocks.
+
+---
+
+**Label Color** — color picker (default: white)
+
+Color of the text label inside each OB box.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` (default: `Small`)
+
+Size of the label text.
+
+---
+
+**Show Volume** — toggle (default: off)
+
+Displays a small volume bar inside each OB box showing relative volume at formation. Useful for judging the institutional significance of the block.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+HTF Order Blocks are the team's primary supply and demand reference beyond FVGs. When looking for entries, the team checks whether the target pullback zone is also an HTF OB — when a 15-minute FVG overlaps with an HTF OB from the 1-hour or 4-hour chart, the confluence is treated as the highest-quality entry location on the chart.
+
+The breaker block feature is used selectively — primarily on higher timeframes like the 4-hour or daily, where a broken OB creates a meaningful flip zone. For intraday 1-minute execution, breakers are less relevant than fresh OBs and FVGs.

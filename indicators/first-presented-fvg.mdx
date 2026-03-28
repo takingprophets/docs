@@ -1,24 +1,204 @@
 ---
 title: "First Presented Fair Value Gap"
-description: "Identifies and marks the first Fair Value Gap presented after a liquidity sweep — a core entry concept in ICT-based trading."
+description: "Marks the very first Fair Value Gap that forms after the NY AM and PM session opens each day."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Identifies and marks the first Fair Value Gap presented after a liquidity sweep — a core entry concept in ICT-based trading.
+**First Presented FVG** is built around a specific ICT concept: the first Fair Value Gap that forms in the AM session (between 9:32–10:00 AM ET) and PM session (between 1:32–2:00 PM ET) carries special significance. These gaps mark the initial directional bias expressed by the market at the start of each session — where institutions began their delivery. Price frequently returns to the first gap before continuing or reversing, making it a reliable intraday draw target and re-entry zone.
+
+This version of the indicator shows exactly one gap per session per day — the single gap that opened each session's delivery. It resets at 9:30 AM each day when "Only show current day gaps" is enabled. The indicator detects both bullish and bearish first-presented gaps automatically, and it includes a full **Opening Range Gap (ORG)** overlay — the gap between the previous day's 4:14 PM close and the 9:30 AM open, with gradient levels at 0%, 25%, 50%, 75%, and 100%.
+
+The ORG is a key ICT PDA array that provides the daily price delivery context. When the first-presented FVG aligns with an ORG gradient level, the confluence significantly strengthens the zone.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General Settings
+
+**Only show current day gaps** — toggle (default: on)
+
+When on, all gap drawings reset at 9:30 AM each day. Only the current day's first-presented gaps are visible. Turn off to keep prior days' gaps on the chart for historical reference.
+
+---
+
+**Enable AM gaps** — toggle (default: on)
+
+Toggles detection and drawing of AM session first-presented FVGs. Disable if you only trade the PM session.
+
+---
+
+**Enable PM gaps** — toggle (default: on)
+
+Toggles detection and drawing of PM session first-presented FVGs.
+
+---
+
+**Enable ORG** — toggle (default: on)
+
+Shows the Opening Range Gap and its gradient levels. The ORG forms daily between the prior close and the 9:30 AM open.
+
+---
+
+### AM Gaps
+
+**Color** — color picker (default: red, 50% transparent)
+
+Fill color for AM session first-presented FVG boxes.
+
+---
+
+**Label** — toggle (default: on)
+
+Displays a "First Presented" label on the AM gap box.
+
+---
+
+**Label Color** — color picker (default: black)
+
+Color of the AM gap label text.
+
+---
+
+**Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the AM label text.
+
+---
+
+**Time** — toggle (default: on)
+
+Includes the formation time (HH:MM) in the label.
+
+---
+
+**Date** — toggle (default: on)
+
+Includes the formation date (M/D) in the label.
+
+---
+
+**CE** — toggle (default: on)
+
+Draws a line at the 50% Consequent Encroachment level of the AM gap.
+
+---
+
+**CE Color** — color picker (default: black)
+
+Color of the CE midline.
+
+---
+
+**CE Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Style of the CE midline.
+
+---
+
+### PM Gaps
+
+**Color** — color picker (default: blue, 50% transparent)
+
+Fill color for PM session first-presented FVG boxes.
+
+---
+
+**Label** — toggle (default: on)
+
+Displays a "First Presented" label on the PM gap.
+
+---
+
+**Label Color** — color picker (default: black)
+
+Color of the PM gap label text.
+
+---
+
+**Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the PM label text.
+
+---
+
+**Time** — toggle (default: on)
+
+Includes the formation time in the PM gap label.
+
+---
+
+**Date** — toggle (default: on)
+
+Includes the formation date in the PM gap label.
+
+---
+
+**CE** — toggle (default: on)
+
+Draws the 50% CE level on the PM gap.
+
+---
+
+**CE Color** — color picker (default: black)
+
+Color of the PM CE line.
+
+---
+
+**CE Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Style of the PM CE line.
+
+---
+
+### ORG Style
+
+**Box** — color picker (default: red, fully opaque)
+
+Color for the ORG box and its associated drawings.
+
+---
+
+**No fill** — toggle (default: on)
+
+Removes the fill from the ORG box, showing only the gradient lines. Recommended — the gradients are the primary reference, not the box fill.
+
+---
+
+**Border** — toggle (default: off)
+
+Adds a visible border to the ORG box.
+
+---
+
+**Gradients** — toggle (default: on)
+
+Draws horizontal lines at the 0%, 25%, 50%, 75%, and 100% levels within the ORG.
+
+---
+
+**Labels** — toggle (default: on)
+
+Shows percentage labels next to each gradient line.
+
+---
+
+**Label Color** — color picker (default: red, fully opaque)
+
+Color of the gradient level labels.
+
+---
+
+**0% / 25% / 50% / 75% / 100% gradient levels** — each has a toggle, color picker, line style, and width
+
+Each gradient level can be individually toggled, colored, and styled. The 50% level (midpoint of the ORG) is particularly important as a daily equilibrium reference.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The first-presented FVG is the team's primary reference level for each session. After the 9:30 AM open, the team waits for the first FVG to form in the initial 30-minute window. That zone defines the session's bias — a bullish gap acts as support and a potential buy zone; a bearish gap acts as resistance and a potential sell zone.
+
+The ORG adds daily macro context: when the first-presented AM FVG aligns with one of the ORG gradient levels — particularly the 50% midpoint — the confluence makes it a stronger zone. Price trading down into a bullish first-presented gap that sits at the ORG 50% is a textbook long setup during the AM session. The time and date labels help quickly identify whether a gap formed today or carries over from a prior session.

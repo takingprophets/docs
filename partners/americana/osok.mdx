@@ -1,24 +1,144 @@
 ---
 title: "OSOK AMERICANA"
-description: "One Shot One Kill — a precision entry indicator built for the AMERICANA community."
+description: "One Shot One Kill — a CRT-based precision entry indicator built for the AMERICANA community with HTF candle projection, IPDA levels, and sweep detection."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. Join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-OSOK AMERICANA is a partner indicator built for the AMERICANA trading community. Built around the One Shot One Kill entry philosophy — high-conviction setups only, with a strict confluence requirement before any trade is displayed.
+**OSOK AMERICANA** (One Shot One Kill) is a CRT-based (Candle Range Theory) entry framework built for the AMERICANA trading community. It renders higher-timeframe candles directly on the chart, identifies the three CRT phases (setup candle, manipulation/sweep candle, distribution candle), marks the IPDA (Interbank Price Delivery Algorithm) reference range, and highlights the sweep of the CRT setup candle's high or low as the confirmation signal.
+
+The framework is built on the principle that each HTF candle goes through three phases: the setup candle establishes the range, the manipulation candle sweeps one side of that range (the "One Shot"), and the distribution candle delivers price to the opposing extreme (the "One Kill"). By identifying this sequence as it forms, the indicator gives traders a real-time view of CRT setup progression and fires alerts at key transition moments.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Keep Old Setups** — toggle
+
+When on, completed or expired CRT setups remain visible on the chart. When off, old setups are removed to keep the chart current.
 
 ---
 
-## How to Get Access
+### Higher Timeframe
 
-Access to OSOK AMERICANA is sold through the AMERICANA community on Whop. See the [How to Use](/how-to-use) guide for setup instructions once you've purchased.
+**Show Candle 1 / 2 / 3** — toggle + color picker (each)
+
+Controls visibility and background color for each of the three CRT phase candles displayed on the chart. Candle 1 is the setup, Candle 2 is the manipulation, and Candle 3 is the distribution.
+
+---
+
+### IPDA
+
+**Show IPDA** — toggle
+
+Displays the IPDA reference range on the chart. The IPDA range represents the interbank price delivery algorithm's active price window.
+
+---
+
+**Show IPDA Label** — toggle
+
+Displays a text label identifying the IPDA range.
+
+---
+
+**IPDA Color** — color picker
+
+Color of the IPDA range zone.
+
+---
+
+**IPDA Line Style** — `Solid` | `Dashed` | `Dotted`
+
+Style of the IPDA range boundary lines.
+
+---
+
+**IPDA Line Width** — integer
+
+Thickness of the IPDA range lines.
+
+---
+
+### Sweep Style
+
+**CRT High Color** — color picker
+
+Color of the line marking the CRT setup candle's high — the level that the manipulation candle targets for a bearish sweep.
+
+---
+
+**CRT Low Color** — color picker
+
+Color of the line marking the CRT setup candle's low — the level targeted for a bullish sweep.
+
+---
+
+**Sweep Line Style** — `Solid` | `Dashed` | `Dotted`
+
+Style of the sweep level lines.
+
+---
+
+**Sweep Line Width** — integer
+
+Thickness of the sweep level lines.
+
+---
+
+### Open Price Style
+
+**Open Price Color** — color picker
+
+Color of the CRT candle open price line. The open price is a key reference within the CRT framework — distribution typically delivers back through the open.
+
+---
+
+**Open Price Line Style** — `Solid` | `Dashed` | `Dotted`
+
+Style of the open price line.
+
+---
+
+**Open Price Line Width** — integer
+
+Thickness of the open price line.
+
+---
+
+### Alerts
+
+**Enable Alerts** — toggle
+
+Master toggle for all alerts.
+
+---
+
+**Session 1 / 2 / 3** — toggle + session time
+
+Alert windows. Session 1 defaults to `0930-1600` and is on. Sessions 2 and 3 are off. Alerts only fire within enabled session windows.
+
+---
+
+**Potential Setup Alert** — toggle + message
+
+Fires when a potential CRT setup is forming (setup candle identified, awaiting manipulation).
+
+---
+
+**Validation Alert** — toggle + message
+
+Fires when the setup is confirmed — the sweep of the setup candle's high or low has occurred.
+
+---
+
+**Invalidation Alert** — toggle + message
+
+Fires when the setup is invalidated — price has not swept as expected and the CRT structure has broken down.
+
+---
+
+## How We Use It
+
+OSOK AMERICANA is used by the AMERICANA community as the primary HTF context indicator. The three-phase candle display makes the CRT structure immediately visible: the setup candle's range is the map, the manipulation candle is the trigger, and the distribution candle is the trade. The sweep alert is the entry signal — when price sweeps the CRT setup candle's high or low and the validation alert fires, the community looks for a 1-minute FVG or CISD in the direction of the expected distribution move. The IPDA range contextualizes where the current CRT setup sits relative to the broader interbank delivery window.

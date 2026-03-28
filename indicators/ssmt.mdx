@@ -1,24 +1,56 @@
 ---
 title: "SSMT"
-description: "Session-based SMT divergence detection — filters SMT signals within specific trading sessions for higher-quality setups."
+description: "Advanced SMT divergence tool with automatic correlated asset detection across multiple instrument pairs and cycle-based divergence analysis."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Session-based SMT divergence detection — filters SMT signals within specific trading sessions for higher-quality setups.
+**SSMT** (Session Smart Money Technique) is a sophisticated SMT divergence detector that automatically identifies the correct correlated asset based on the instrument you're trading. Rather than requiring you to manually update the comparison symbol, SSMT maps known pairs automatically: NQ correlates to ES (and vice versa), MNQ correlates to MES, and additional futures pairs are handled the same way. You can also override to manual mode and specify any comparison symbol directly.
+
+The indicator runs divergence detection across multiple cycle scales simultaneously — including micro (intraday), 90-minute, daily, weekly, and monthly — all styled through a single unified set of visual settings. This multi-cycle approach surfaces SMT divergence at the scale most relevant to your current trading context without requiring separate indicators for each timeframe.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### SMT
+
+**Enable SMT** — toggle (default: on)
+
+Master switch for all SMT detection and drawing.
+
+---
+
+**Correlation Mode** — `Automatic` | `Manual` (default: `Automatic`)
+
+In `Automatic` mode, SSMT detects the current instrument and selects the appropriate correlated asset from its built-in mapping (NQ↔ES, MNQ↔MES, etc.). In `Manual` mode, you specify the comparison symbol directly.
+
+---
+
+**Manual Comparison Symbol** — symbol (default: `CME_MINI:ES1!`)
+
+Only active when Correlation Mode is set to `Manual`. Enter any symbol to use as the comparison asset.
+
+---
+
+**SMT Line Color** — color picker (default: black)
+
+Color of all SMT divergence lines across all cycle scales.
+
+---
+
+**SMT Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Tiny`)
+
+Size of SMT divergence labels.
+
+---
+
+**SMT Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Solid`)
+
+Style of SMT divergence lines.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+SSMT is the team's preferred SMT tool when trading standard futures pairs (ES, NQ, MES, MNQ). The automatic correlation mode eliminates the manual symbol-switching required by the standard SMT Divergence indicator — when switching between ES and NQ charts, SSMT always shows the correct paired divergence without any reconfiguration. The multi-cycle detection is particularly useful in review: daily and weekly SMT divergences visible alongside the intraday cycle confirm that short-term manipulation aligns with macro-scale institutional positioning. For live trading, the micro/intraday cycle is the primary signal; the longer cycles serve as structural context.

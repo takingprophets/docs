@@ -1,24 +1,84 @@
 ---
 title: "HTF Points of Interest"
-description: "Aggregates and displays higher timeframe Points of Interest — order blocks, FVGs, and rejection blocks — in a unified view."
+description: "Displays the single closest HTF Fair Value Gap to current price using automatic or manual timeframe alignment."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Aggregates and displays higher timeframe Points of Interest — order blocks, FVGs, and rejection blocks — in a unified view.
+**HTF POI** (Points of Interest) is a focused, single-timeframe FVG overlay that automatically selects and displays the most relevant HTF Fair Value Gap closest to the current price. Rather than showing all gaps from multiple timeframes, it surfaces just the one that matters most — the nearest unmitigated gap above or below — giving you a clean, uncluttered view of where price is most likely drawing.
+
+The timeframe alignment can be set to Automatic, where the indicator selects an appropriate HTF based on the same alignment logic used in the iFVG Ultimate indicator, or to Manual where you specify the exact timeframe. The gap is drawn as a colored box with an optional border and label, and extends forward by a configurable number of bars so the zone remains visible as the current candle develops.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Extend HTF FVGs by X bars** — integer, min 0 (default: `10`)
+
+How many bars to the right of the current candle the FVG box extends. This keeps the zone visible as a forward reference.
+
+---
+
+**Alignment Mode** — `Automatic` | `Manual` (default: `Automatic`)
+
+`Automatic` selects the HTF based on a built-in alignment table (the same logic used in the broader iFVG ecosystem). For example, on a 1-minute chart, Automatic typically aligns to 15 minutes or 60 minutes. `Manual` lets you specify the exact timeframe in the selector below.
+
+---
+
+**Timeframe** — timeframe selector (default: `60`, active only in Manual mode)
+
+The specific HTF to use when Alignment Mode is Manual.
+
+---
+
+### Appearance
+
+**Label Text Color** — color picker (default: black)
+
+Color of text inside the FVG box.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the label text.
+
+---
+
+**Bullish Box Fill** — color picker (default: teal, 90% transparent)
+
+Fill color for bullish HTF FVGs.
+
+---
+
+**Bearish Box Fill** — color picker (default: red, 90% transparent)
+
+Fill color for bearish HTF FVGs.
+
+---
+
+**Border** — toggle (default: off)
+
+Adds an outline border to the FVG box.
+
+---
+
+**Bull Border** — color picker (default: teal, 60% transparent)
+
+Border color for bullish FVGs (active only when Border is on).
+
+---
+
+**Bear Border** — color picker (default: red, 60% transparent)
+
+Border color for bearish FVGs (active only when Border is on).
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+HTF POI is the team's go-to when they want a single clean reference zone on the chart without the visual complexity of a full multi-timeframe FVG overlay. It works particularly well in combination with the Prophet Model or Flow State Model — those indicators provide the entry trigger (CISD, FVG), and HTF POI shows the macro context zone that the trade is being taken from.
+
+In Automatic mode, the indicator handles timeframe selection intelligently based on the chart resolution, so the team doesn't need to manually reconfigure it when switching between execution timeframes. When price is trading directly into the HTF POI zone, any CISD or FVG that forms inside that box gets elevated priority as a setup location.

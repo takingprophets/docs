@@ -1,24 +1,242 @@
 ---
 title: "Prophet Model"
-description: "Taking Prophets' proprietary entry model combining liquidity sweeps, inversion patterns, and SMT divergence into a complete trade framework."
+description: "TakingProphets' proprietary entry model that combines Fair Value Gaps, CISD, EPE, and limit levels into a single integrated setup tool with alerts and checklist."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Taking Prophets' proprietary entry model combining liquidity sweeps, inversion patterns, and SMT divergence into a complete trade framework.
+**Prophet Model** is TakingProphets' core entry framework rendered as a single indicator. It integrates four components into one workflow: Fair Value Gaps (the imbalance zone that defines the entry area), CISD (the Change in State of Delivery line that confirms the setup), EPE (the Engineered Paired Entry — the refined entry level within the FVG), and Limit levels (TP, BE, and SL targets). When all four elements align, the indicator draws each component on the chart and can fire an alert on CISD confirmation.
+
+Two optional tables enhance the trading session workflow: a Relationships table that shows contextual market data, and a Checklist table that tracks which setup conditions have been met. The Prophet Model is the complete execution layer — from setup identification through limit order placement.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### Fair Value Gaps
+
+**Show FVGs** — toggle (default: on)
+
+Enables drawing of Fair Value Gap zones.
+
+---
+
+**Show FVG Border** — toggle
+
+Adds a border outline around each FVG box.
+
+---
+
+**FVG Label Color** — color picker
+
+Color of the FVG label text.
+
+---
+
+**FVG Label Size** — `Tiny` | `Small` | `Normal` | `Large`
+
+Size of FVG labels.
+
+---
+
+**Bullish FVG Color** — color picker
+
+Fill color for bullish FVG zones.
+
+---
+
+**Bearish FVG Color** — color picker
+
+Fill color for bearish FVG zones.
+
+---
+
+### CISD
+
+**Show CISD** — toggle (default: on)
+
+Enables drawing of CISD (Change in State of Delivery) lines. A CISD marks the price level at which institutional delivery changed direction — the open of the candle sequence that initiated the sweep and displacement.
+
+---
+
+**CISD Line Color** — color picker
+
+Color of the CISD line.
+
+---
+
+**CISD Text Color** — color picker
+
+Color of the CISD label text.
+
+---
+
+**CISD Label Size** — `Tiny` | `Small` | `Normal` | `Large`
+
+Size of the CISD label.
+
+---
+
+### EPE
+
+**Show EPE** — toggle (default: on)
+
+Enables drawing of the EPE (Engineered Paired Entry) level — the refined entry point within the FVG zone, typically the 50% level or a specific internal reference.
+
+---
+
+**EPE Line Color** — color picker
+
+Color of the EPE line.
+
+---
+
+**EPE Text Color** — color picker
+
+Color of the EPE label text.
+
+---
+
+**EPE Label Size** — `Tiny` | `Small` | `Normal` | `Large`
+
+Size of the EPE label.
+
+---
+
+### Limits
+
+**Show Limits** — toggle (default: on)
+
+Enables limit level lines for TP, BE, and SL.
+
+---
+
+**Show Limit Prices** — toggle
+
+Displays the price value alongside each limit label.
+
+---
+
+**Show TP** — toggle
+
+Shows the Take Profit level line.
+
+---
+
+**TP Color** — color picker
+
+Color of the TP level line.
+
+---
+
+**Show BE** — toggle
+
+Shows the Break-Even level line.
+
+---
+
+**BE Color** — color picker
+
+Color of the BE level line.
+
+---
+
+**Show SL** — toggle
+
+Shows the Stop Loss level line.
+
+---
+
+**SL Color** — color picker
+
+Color of the SL level line.
+
+---
+
+### Info Box
+
+**Show Info Box** — toggle (default: on)
+
+Displays the indicator information panel on the chart.
+
+---
+
+### Tables
+
+**Show Relationships Table** — toggle
+
+Displays a table of contextual market relationships relevant to the current setup.
+
+---
+
+**Show Checklist** — toggle
+
+Displays a setup checklist table that tracks which Prophet Model conditions have been confirmed.
+
+---
+
+**Table Text Size** — size selector
+
+Font size for all table text.
+
+---
+
+**Header Background Color** — color picker
+
+Background color for table header rows.
+
+---
+
+**Header Text Color** — color picker
+
+Text color for table header rows.
+
+---
+
+**Normal Cell Text Color** — color picker
+
+Text color for standard (unconfirmed) checklist cells.
+
+---
+
+**Highlight Cell Text Color** — color picker
+
+Text color for confirmed or highlighted checklist cells.
+
+---
+
+**Checklist Table Location** — position selector
+
+Screen position for the checklist table.
+
+---
+
+**Relationships Table Location** — position selector
+
+Screen position for the relationships table.
+
+---
+
+### Alerts
+
+**Enable Alerts** — toggle (default: on)
+
+Master toggle for all alerts.
+
+---
+
+**Session 1 / 2 / 3** — toggle + session time
+
+Alert windows. Session 1 defaults to `0930-1600` and is on. Sessions 2 and 3 are off. Alerts only fire within enabled session windows.
+
+---
+
+**Alert on CISD** — toggle + message (default: on, `A CISD has formed.`)
+
+Fires when a new CISD is detected, signaling a potential Prophet Model setup.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+Prophet Model is the team's primary execution indicator. It runs on the 1-minute chart during live sessions and draws the complete setup: the FVG defines the zone, the CISD fires the alert and confirms the setup direction, the EPE marks the limit entry price within the zone, and the limit levels set TP, BE, and SL with a single glance. The CISD alert is the trigger — when it fires inside a killzone with HTF confluence, the team evaluates the setup immediately using the checklist table to verify all conditions. The model is designed so that every element needed to enter and manage the trade is visible on one indicator at the same time.

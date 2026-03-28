@@ -3,22 +3,56 @@ title: "Breaker Blocks"
 description: "Identifies breaker blocks — former order blocks that have been violated and flipped to act as opposing areas of interest."
 ---
 
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
-
 ## Overview
 
-Identifies breaker blocks — former order blocks that have been violated and flipped to act as opposing areas of interest.
+A **Breaker Block** is an order block that has been broken — a former supply zone that price has closed through to the upside (creating a bullish breaker), or a former demand zone that price has closed through to the downside (creating a bearish breaker). Once broken, the zone is expected to flip its role: a former bearish order block that was broken becomes a magnet for price on a retest from above, and vice versa.
+
+The concept reflects the idea that the same institutions that originally drove price from that zone are now trapped on the wrong side. When price returns to the breaker, those trapped participants must exit, which adds fuel to the move in the new direction. Breaker blocks are considered higher-quality than standard order blocks precisely because the flip has already been confirmed.
+
+This indicator detects breaker blocks using a zigzag-based market structure approach — it identifies significant swing highs and lows, looks for order blocks at those swing points, and tracks whether price subsequently closes through the block in the opposite direction. Detected breakers are drawn as colored boxes with an optional 50% midline. The indicator keeps the most recent blocks on the chart (configurable) and removes invalidated ones when price closes back through the breaker (with the Hide When Invalidated toggle).
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+**Display Breaker Block** — toggle (default: on)
+
+Master visibility toggle for all breaker block drawings.
+
+---
+
+**Bullish Color** — color picker (default: green, 80% transparent)
+
+Fill color for bullish breaker blocks — former bearish order blocks that have been broken to the upside.
+
+---
+
+**Bearish Color** — color picker (default: red, 80% transparent)
+
+Fill color for bearish breaker blocks — former bullish order blocks that have been broken to the downside.
+
+---
+
+**Show 50% Line** — toggle (default: on)
+
+Draws a dashed line at the midpoint of each breaker block. The 50% level is frequently the most precise area within the block where price reacts. Enable this when you want exact entry levels rather than working with the full block range.
+
+---
+
+**Max Visible** — integer, 1–50 (default: `10`)
+
+Controls how many recent breaker blocks are kept on the chart at one time. Older blocks are removed as new ones form. Reduce this number on faster timeframes where blocks form frequently to avoid chart clutter.
+
+---
+
+**Hide When Invalidated** — toggle (default: on)
+
+When a bullish breaker is invalidated (price closes below it) or a bearish breaker is invalidated (price closes above it), the block is removed from the chart. When off, invalidated blocks remain visible. The default on keeps the chart clean and ensures you're only looking at still-relevant zones.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+Breaker blocks are used in combination with the standard order block and FVG toolkit during live sessions. After a significant move breaks through an established order block, the team marks that zone as a potential breaker and waits for price to return. The most reliable setups occur when a breaker block aligns with an HTF FVG or sits at a key liquidity level — confluence between the two makes the retest more predictable.
+
+The 50% level inside each breaker is the default entry target. Price rarely fills the entire block cleanly on a retest — it typically wicks into the lower half and rejects. Setting a limit at the midline with a stop just beyond the block's full range (below the bottom for a bullish breaker, above the top for a bearish breaker) gives a favorable risk-to-reward setup. These setups are most reliable during the AM session on 1-minute and 5-minute timeframes.

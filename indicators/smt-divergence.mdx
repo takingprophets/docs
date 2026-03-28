@@ -1,24 +1,70 @@
 ---
 title: "SMT Divergence"
-description: "Detects Smart Money Technique divergences between correlated assets — a signal that one instrument is making a new high/low while its pair is not."
+description: "Detects Smart Money Technique divergence between correlated assets — when your instrument makes a new swing extreme that the correlated asset fails to confirm."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Detects Smart Money Technique divergences between correlated assets — a signal that one instrument is making a new high/low while its pair is not.
+**SMT Divergence** identifies Smart Money Technique (SMT) divergence in real time. SMT divergence occurs when your instrument makes a new swing high or low while a correlated asset fails to confirm that extreme. On ES and NQ — which are highly correlated — an ES new high without a corresponding NQ new high signals that the move may be a manipulation (stop hunt) rather than a genuine breakout. This divergence is one of the most reliable reversal signals in the ICT framework.
+
+The indicator runs two pivot detection passes simultaneously: a primary (tighter) and a secondary (wider) lookback. This two-pass approach catches both minor and significant structural divergences without requiring you to switch settings. You can optionally filter to show only the secondary (more significant) signals to reduce noise.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### Settings
+
+**Primary Pivot Lookback** — integer, min 2 (default: `5`)
+
+The pivot lookback for the primary (smaller) SMT swing detection. Smaller values detect more frequent swings.
+
+---
+
+**Secondary Pivot Lookback** — integer, min 2 (default: `8`)
+
+The pivot lookback for the secondary (larger) SMT swing detection. Larger values detect fewer but more structurally significant swing extremes.
+
+---
+
+**Comparison Symbol** — symbol (default: `ES1!`)
+
+The correlated asset to compare against. Set to `NQ1!` when trading ES, and keep as `ES1!` when trading NQ. For micros, use `MES1!` or `MNQ1!` as appropriate.
+
+---
+
+**Only Display Significant** — toggle (default: off)
+
+When on, only SMT divergences detected at the secondary (larger) pivot lookback are shown. This reduces signal frequency but focuses attention on the most structurally meaningful divergences.
+
+---
+
+### Style
+
+**Line Color** — color picker (default: white)
+
+Color of the SMT divergence lines connecting the two diverging swing extremes.
+
+---
+
+**Line Width** — integer, 1–4 (default: `1`)
+
+Thickness of SMT lines.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Style of SMT lines.
+
+---
+
+**Label Size** — `Auto` | `Tiny` | `Small` | `Normal` | `Large` | `Huge` (default: `Small`)
+
+Size of SMT divergence labels.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+SMT Divergence is the team's correlated-asset confirmation tool. When ES is trading — comparison symbol is set to `NQ1!`. When NQ is trading, it's flipped to `ES1!`. The signal is read as a divergence warning: if price sweeps a session high on ES but NQ makes a lower high, the SMT divergence line appears and the team prepares for a potential short. The setup becomes a full entry when the SMT divergence aligns with a rejection block or FVG at the same swing level. The `Only Display Significant` toggle is left off during live sessions so minor divergences are visible for context.

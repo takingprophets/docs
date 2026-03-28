@@ -1,24 +1,204 @@
 ---
 title: "ICT Killzones + Macros"
-description: "Highlights the standard ICT Killzone windows and intraday macro times directly on the chart."
+description: "Highlights ICT trading session windows, session highs/lows, key open levels, and previous week levels on the chart."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Highlights the standard ICT Killzone windows and intraday macro times directly on the chart.
+**ICT Killzones + Macros** is a session and time reference overlay that draws the five major ICT trading windows (Asia, London, NY AM, NY Lunch, NY PM), tracks each session's high and low, marks key daily open prices (Midnight Open and True Day Open at 6 PM), and draws the previous week's high and low. It also provides fully customizable label text for every session level so the chart reads exactly the way you want.
+
+The "Killzone" concept in ICT refers to the specific windows when institutional order flow is most active — the London open (2–5 AM ET), the NY open (8:30–11 AM ET), and the NY afternoon (1:30–4 PM ET). Trading during these windows, when liquidity is highest and price is most likely to make directional moves, is central to the ICT methodology. This indicator makes those windows permanently visible on your chart.
+
+Session high and low levels extend forward from their formation point as horizontal lines with labels, and are automatically removed when price trades through them (or kept visible if "Show Mitigated Levels" is on). The Midnight Open and True Day Open lines give you the key daily reference prices for establishing intraday bias.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### Settings
+
+**Timeframe Limit** — timeframe selector (default: `30`)
+
+Drawings will not appear on timeframes at or above this value. This prevents cluttered charts on higher timeframes where session lines are irrelevant. Default of 30 means lines appear on 1m through 15m but not on 30m and above.
+
+---
+
+### Visual Settings
+
+**Session Lines Color** — color picker (default: white, 90% transparent)
+
+Color of the vertical lines marking session start and end boundaries. The default near-transparent white keeps them subtle.
+
+---
+
+**Level Lines Color** — color picker (default: white)
+
+Color of the session high and low level lines.
+
+---
+
+**Label Color** — color picker (default: white)
+
+Color of all labels on the chart.
+
+---
+
+**Level Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the session high/low level labels.
+
+---
+
+**Session Start/End Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the session boundary labels.
+
+---
+
+**Line Extension (minutes)** — integer, 0–600 (default: `300`)
+
+How many minutes to the right session level lines extend from their formation point. 300 minutes = 5 hours of forward extension.
+
+---
+
+**Show Session Start/End Lines** — toggle (default: on)
+
+Shows vertical lines at the start and end of each session.
+
+---
+
+**Show Session Start/End Labels** — toggle (default: on)
+
+Shows text labels at session boundaries.
+
+---
+
+### Midnight Open Line
+
+**Show Midnight Open Line** — toggle (default: on)
+
+Draws a horizontal line at the 12:00 AM ET open price. This is a core ICT reference — the daily equilibrium point that defines whether price is in a premium or discount relative to the new day's starting price.
+
+---
+
+**Midnight Line Color** — color picker (default: white, 50% transparent)
+
+Color of the Midnight Open line.
+
+---
+
+### True Day Open Line (6 PM)
+
+**Show True Day Open Line** — toggle (default: on)
+
+Draws a line at the 6:00 PM ET open price — the start of the futures trading day. This price level defines the true day's range.
+
+---
+
+**True Day Open Line Color** — color picker (default: white, 50% transparent)
+
+Color of the True Day Open line.
+
+---
+
+### Previous Week Levels
+
+**Show Previous Week Levels** — toggle (default: on)
+
+Draws horizontal lines at the previous week's high and low. These are significant macro liquidity targets.
+
+---
+
+**Previous Week Levels Color** — color picker (default: white, 50% transparent)
+
+Color of the previous week high and low lines.
+
+---
+
+**Previous Week Levels Style** — `Solid` | `Dashed` | `Dotted` (default: `Dotted`)
+
+Line style for previous week levels.
+
+---
+
+### Label Settings
+
+**Show Session Lines** — toggle (default: on)
+
+Shows the session high/low level lines.
+
+---
+
+**Show Labels** — toggle (default: on)
+
+Shows text labels on session high/low lines.
+
+---
+
+**Show Session High/Low Levels** — toggle (default: on)
+
+Enables drawing of the session high and low horizontal levels.
+
+---
+
+**Show Mitigated Levels** — toggle (default: off)
+
+When on, level lines remain on the chart after price has traded through them. When off (default), mitigated levels are removed immediately.
+
+---
+
+### Custom Labels
+
+Each of the following session level labels can be set to any text:
+
+**Asia High Label** (default: `ASIA.H`), **Asia Low Label** (default: `ASIA.L`), **London High** (default: `LON.H`), **London Low** (default: `LON.L`), **NY AM High** (default: `NYAM.H`), **NY AM Low** (default: `NYAM.L`), **NY Lunch High** (default: `NYLU.H`), **NY Lunch Low** (default: `NYLU.L`), **NY PM High** (default: `NYPM.H`), **NY PM Low** (default: `NYPM.L`)
+
+Customize these labels to match your personal workflow or chart aesthetic.
+
+---
+
+### Session Inputs
+
+**Asia Session** — toggle + session time (default: on, `2000-0000`)
+
+Enables the Asia session window. The default covers 8 PM to midnight ET.
+
+---
+
+**London Session** — toggle + session time (default: on, `0200-0500`)
+
+Enables the London session window. Default is 2 AM to 5 AM ET.
+
+---
+
+**NY AM Session** — toggle + session time (default: on, `0830-1130`)
+
+Enables the NY AM session window. The default starts at 8:30 (data release time) and runs through 11:30 AM ET.
+
+---
+
+**NY Lunch Session** — toggle + session time (default: on, `1200-1300`)
+
+Enables the NY Lunch session. The midday lull between AM and PM.
+
+---
+
+**NY PM Session** — toggle + session time (default: on, `1330-1800`)
+
+Enables the NY PM session. Default runs from 1:30 PM through 6 PM ET.
+
+---
+
+### Timezone
+
+**Timezone** — string (default: `America/New_York`)
+
+All session times are interpreted in this timezone. Leave as New York unless you need to adapt for a different regional market.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+ICT Killzones + Macros is the team's session structure tool, always running on the 1-minute chart. The session highs and lows from Asia and London are the primary liquidity targets for the AM session — the team enters the NY open looking for a sweep of the London or Asia high/low before making a directional entry. The Midnight Open line divides the day into premium (above) and discount (below), informing which side to trade from.
+
+The line extension setting is tuned to keep levels visible for most of the trading day without extending all the way to the right edge. The custom label feature is used to display personal shorthand. Show Mitigated Levels is typically left off to keep the chart clean — once a level is swept, it's removed and the team moves to the next reference.

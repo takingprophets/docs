@@ -3,22 +3,62 @@ title: "CISD"
 description: "Detects and marks Change in State of Delivery — the candle sequence that signals a shift in market direction."
 ---
 
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
-
 ## Overview
 
-Detects and marks Change in State of Delivery — the candle sequence that signals a shift in market direction.
+**Change in State of Delivery (CISD)** is an ICT concept that identifies the precise price level where the market shifted from one delivery state to another — typically from bullish to bearish or vice versa. It's detected by a specific sequence: a series of same-directional candles (bullish or bearish run), followed by a liquidity sweep above or below a swing point, and then a displacement candle that closes back through the open of the original sequence. That open price is the CISD level.
+
+The importance of the CISD is that it marks the exact price where institutional delivery changed hands. Price frequently returns to this level before continuing in the new direction, making it a high-precision re-entry zone. A CISD is a sharper and more specific signal than a standard FVG — it represents not just an imbalance but an actual transition in market intent.
+
+This indicator automates the detection process. It tracks swing highs and lows, monitors for sweeps of those levels, and then watches for displacement candles that close through the prior sequence's opening price. When the conditions are met, it draws a horizontal line at the CISD level and labels it `CISD+` (bullish, expecting a move up) or `CISD-` (bearish, expecting a move down). Lines extend forward a configurable number of bars and clean up automatically after 200 bars.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+**Show Labels** — toggle (default: on)
+
+Displays the `CISD+` or `CISD-` label next to each detected level. Turn off if you want the lines without text annotations.
+
+---
+
+**CISD Line Color** — color picker (default: black)
+
+Color of the horizontal CISD lines drawn on the chart.
+
+---
+
+**Label Color** — color picker (default: black)
+
+Color of the text labels attached to each CISD line.
+
+---
+
+**Line Width** — integer, 1–4 (default: `2`)
+
+Thickness of the CISD lines. Higher values make the levels more visible on busy charts.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Solid`)
+
+Visual style of the CISD lines. Solid is the default and most prominent. Switch to Dashed or Dotted if you want these levels to appear secondary to other drawings on your chart.
+
+---
+
+**Line Extension (bars)** — integer, 5–50 (default: `15`)
+
+How many bars to the right the CISD line extends from the point of detection. The line represents the level going forward — extend it further if you're trading on slower timeframes or want the level to remain visible through a longer retest window.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` | `Large` (default: `Small`)
+
+Size of the CISD label text.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The CISD is used as the entry trigger in the Prophet Model workflow. Once a liquidity sweep is confirmed and displacement occurs, the team identifies the CISD level and waits for price to retrace back to it. An entry at the CISD — often combined with a nearby FVG for added confluence — gives a precise, low-risk location with a defined stop below the CISD level.
+
+The indicator works best on the 1-minute chart during killzone hours (NY AM, London, and NY PM). The most reliable setups form when the CISD is backed by an HTF PDA like a 15-minute or hourly FVG — the lower-timeframe CISD inside a higher-timeframe zone gives the highest confluence entry. Watch for the displacement candle to be impulsive and clear, not choppy — that's the sign of genuine institutional involvement.

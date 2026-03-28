@@ -1,24 +1,96 @@
 ---
 title: "Rejection Block Pro+ Snippet"
-description: "Lightweight snippet version of Rejection Block Pro+ for use alongside other indicators."
+description: "Streamlined version of Rejection Block Pro+ with quadrant levels and HTF support but without alerts, designed to run alongside other indicators without overlap."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Lightweight snippet version of Rejection Block Pro+ for use alongside other indicators.
+**Rejection Block Pro+ Snippet** is a slimmed-down version of Rejection Block Pro+ that omits the alerts group. It provides the same multi-timeframe rejection block detection, quadrant-level gradient lines (0%, 25%, 50%, 75%, 100%), and HTF timeframe labels, but is intended for use on charts where another indicator is already handling alerts. Running the Snippet version prevents duplicate alert configurations and reduces indicator slot usage when the full Pro+ alert functionality is covered elsewhere.
+
+All visual and detection settings are identical to the full Pro+ version.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Swing Strength** — `Sensitive` | `Normal` | `Strict` (default: `Normal`)
+
+Controls the pivot lookback for swing detection. `Sensitive` detects more blocks with a tight lookback; `Strict` requires more bars of confirmation and shows only the most significant rejections.
+
+---
+
+**Max Visible Per Side** — integer, 1–2 (default: `1`)
+
+The maximum number of rejection blocks displayed per side (bullish and bearish) per timeframe.
+
+---
+
+### Higher Timeframes
+
+**Show Current TF** — toggle (default: on)
+
+Enables rejection block detection on the current chart timeframe.
+
+---
+
+**HTF 1 / HTF 2 / HTF 3** — toggle + timeframe selector
+
+Three higher-timeframe slots, all off by default. Enable and set each to the desired timeframe.
+
+---
+
+**HTF Bullish Block Color** — color picker (per timeframe)
+
+Fill color for bullish rejection blocks from that timeframe.
+
+---
+
+**HTF Bearish Block Color** — color picker (per timeframe)
+
+Fill color for bearish rejection blocks from that timeframe.
+
+---
+
+**Show HTF Timeframe Label** — toggle (default: on)
+
+Displays the source timeframe inside each HTF rejection block.
+
+---
+
+**HTF Label Size** — `Tiny` | `Small` | `Normal`
+
+Size of the timeframe label text.
+
+---
+
+**HTF Label Color** — color picker
+
+Color of the timeframe label text.
+
+---
+
+### Visual
+
+**Remove Box Fill** — toggle (default: off)
+
+When on, removes the box fill, leaving only the quadrant lines.
+
+---
+
+**Show Quadrants** — toggle (default: on)
+
+Shows the 0%, 25%, 50%, 75%, and 100% quadrant level lines within each rejection block.
+
+---
+
+**0% / 25% / 50% / 75% / 100%** — per-level: toggle, color, style, width, label
+
+Each quadrant level is independently configurable. Toggle visibility, set color, choose line style, adjust width, and enable or disable the percentage label.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The Snippet version is used when the chart already has the full Rejection Block Pro+ running on another pane or when another indicator (such as Prophet Model) is providing alerts. It keeps the visual reference of rejection blocks and quadrant levels without introducing duplicate alert conditions. The setup and entry logic is identical to the full Pro+ version — 50% level as the limit entry, wick tip as the stop, and block entry as the trigger for manual evaluation.

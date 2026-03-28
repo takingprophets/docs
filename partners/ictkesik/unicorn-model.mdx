@@ -1,24 +1,248 @@
 ---
 title: "2022 Model Pro+"
-description: "ICT's 2022 model built for the ICTKESIK community — a structured entry framework combining liquidity, displacement, and FVG delivery."
+description: "ICT's 2022 Unicorn Model built for the ICTKESIK community — a comprehensive entry framework with setup grading, liquidity mapping, SMT, breaker blocks, and full alert support."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. Join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-2022 Model Pro+ is a partner indicator built for the ICTKESIK community. It automates the ICT 2022 model — identifying liquidity sweeps followed by displacement and Fair Value Gap delivery to mark precise entry zones.
+**2022 Model Pro+** is the ICTKESIK community's implementation of ICT's 2022 Unicorn Model — a structured entry framework that combines liquidity sweeps, displacement, Fair Value Gap delivery, and SMT divergence confirmation into a single graded setup tool. The indicator evaluates each potential setup against a configurable checklist of conditions and assigns it a letter grade (A+, A, B+, B, etc.). You can set a minimum grade to filter the display, keeping only the highest-conviction setups visible.
+
+The indicator draws every layer of the Unicorn Model framework simultaneously: buyside and sellside liquidity levels, session liquidity references (NY AM, Asia, London, prior day and week highs/lows), macro time windows, HTF Fair Value Gaps, SMT divergence, ICTKESIK entry levels, limit levels (TP/BE/SL), breaker blocks, current timeframe FVGs, and market structure. A full-featured checklist and relationships table are included for live session workflow.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Bias** — `Bullish` | `Bearish` | `Both`
+
+Filters setups by directional bias. `Both` shows all valid setups regardless of direction.
 
 ---
 
-## How to Get Access
+**Model** — `Both` | `Silver Bullet` | `Unicorn`
 
-Access to 2022 Model Pro+ is sold through the ICTKESIK community on Whop. See the [How to Use](/how-to-use) guide for setup instructions once you've purchased.
+Selects which ICT model variation to detect. `Unicorn` is the full 2022 model; `Silver Bullet` targets the 10–11 AM or 2–3 PM time-of-day setups specifically; `Both` runs detection for either.
+
+---
+
+**Require Macro Time** — toggle
+
+When on, setups are only valid if they form within a recognized ICT macro window (10:10–10:40, 11:10–11:40, 2:10–2:40, 4:03–4:33 ET). This significantly tightens the signal filter.
+
+---
+
+**Remove Losing Setups** — toggle
+
+When on, setups that did not result in a winning trade (price reached the SL before TP) are removed from the chart.
+
+---
+
+**Min Grade to Display** — grade selector (default: `B+`)
+
+Filters out setups below this grade. Only setups with sufficient confluence are shown.
+
+---
+
+**ES Alignment** — toggle
+
+When on, requires that the ES (S&P 500 futures) structural alignment supports the setup direction before displaying it.
+
+---
+
+### Liquidity
+
+**Alignment Mode** — `Auto` | `Manual`
+
+Controls how liquidity timeframe references are selected.
+
+---
+
+**Show Liquidity** — toggle
+
+Enables drawing of buyside and sellside liquidity level lines.
+
+---
+
+**BSL Color** — color picker
+
+Color of buyside liquidity levels (swing highs).
+
+---
+
+**SSL Color** — color picker
+
+Color of sellside liquidity levels (swing lows).
+
+---
+
+**Show Liquidity Sweeps** — toggle
+
+Marks on the chart when a liquidity level has been swept.
+
+---
+
+### Session Liquidity
+
+**Show Session Liquidity** — toggle
+
+Enables the display of session-based reference levels.
+
+---
+
+Session liquidity toggles are available for: **NY AM High/Low**, **Asia High/Low**, **London High/Low**, **Prior Day High (PDH)**, **Prior Day Low (PDL)**, **Prior Week High (PWH)**, **Prior Week Low (PWL)**. Each can be individually enabled or disabled.
+
+---
+
+### Macro
+
+**Show Macro Box** — toggle
+
+Draws a shaded background box over the recognized macro time windows (the specific 30-minute ICT macro periods during the NY session).
+
+---
+
+**Macro Box Color** — color picker
+
+Fill color for the macro window boxes.
+
+---
+
+### Premium & Discount
+
+Settings controlling the display of premium and discount zone shading relative to the current session's range midpoint.
+
+---
+
+### High Time Frame Fair Value Gaps
+
+**Show HTF FVGs** — toggle
+
+Enables drawing of higher-timeframe Fair Value Gaps.
+
+---
+
+Per-timeframe color and visibility settings for HTF FVG display.
+
+---
+
+### SMT
+
+**Enable SMT** — toggle
+
+Enables Smart Money Technique divergence detection.
+
+---
+
+**Comparison Symbol** — symbol
+
+The correlated asset for SMT comparison. Set `NQ1!` when trading ES, `ES1!` when trading NQ.
+
+---
+
+**SMT Style** — color, line style, width, label size
+
+Visual settings for SMT divergence lines and labels.
+
+---
+
+### ICTKESIK Entry
+
+Settings controlling the display of the ICTKESIK-specific entry level within each setup. This marks the precise entry price based on the community's entry model rules.
+
+---
+
+### Limits
+
+**Show Limits** — toggle
+
+Enables TP, BE, and SL level lines.
+
+---
+
+Per-level toggles and color pickers for **Take Profit**, **Break Even**, and **Stop Loss** lines.
+
+---
+
+### Alerts
+
+**Enable Alerts** — toggle
+
+Master toggle for all alerts.
+
+---
+
+**Session 1 / 2 / 3** — toggle + session time
+
+Alert windows for controlling when alerts are active.
+
+---
+
+Alert events include setup detection, setup validation, and setup invalidation.
+
+---
+
+### Watermark
+
+**Show Watermark** — toggle
+
+Displays the ICTKESIK watermark on the chart.
+
+---
+
+### Checklist
+
+**Show Checklist** — toggle
+
+Displays the real-time checklist table showing which setup conditions have been confirmed.
+
+---
+
+**Table Text Size**, **Header Colors**, **Cell Colors** — size and color pickers for checklist table appearance.
+
+---
+
+### Key Open
+
+Settings for displaying key daily and weekly open price reference lines.
+
+---
+
+### Breaker Blocks
+
+**Show Breakers** — toggle
+
+Enables detection and drawing of breaker blocks — former order blocks that have been violated and flipped.
+
+---
+
+Per-direction color and style settings for bullish and bearish breaker blocks.
+
+---
+
+### Current Timeframe FVG
+
+**Show Current TF FVGs** — toggle
+
+Enables FVG drawing on the current chart timeframe alongside the HTF FVGs.
+
+---
+
+### Market Structure Settings
+
+**Show BOS** — toggle
+
+Displays Break of Structure markers.
+
+---
+
+**Show CHoCH** — toggle
+
+Displays Change of Character markers.
+
+---
+
+## How We Use It
+
+2022 Model Pro+ is the ICTKESIK community's all-in-one execution indicator. The grade filter is set to `B+` by default — this eliminates marginal setups and surfaces only those with strong liquidity, FVG, and structural confluence. The `Require Macro Time` toggle is a key filter during focused sessions: when enabled, only setups forming during the official ICT macro windows are shown, which dramatically improves precision. The macro box makes these windows immediately visible so the community knows exactly when to be watching for entries. The integrated limits (TP/BE/SL) mean there is no manual calculation needed — every element of the trade from entry to exit is drawn on the chart the moment the setup qualifies.

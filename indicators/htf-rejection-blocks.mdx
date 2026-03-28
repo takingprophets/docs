@@ -1,24 +1,158 @@
 ---
 title: "HTF Rejection Blocks"
-description: "Projects higher timeframe rejection blocks onto your current chart for multi-timeframe reference."
+description: "Detects and draws rejection blocks from multiple timeframes with alert support for block formation and price entry."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Projects higher timeframe rejection blocks onto your current chart for multi-timeframe reference.
+**HTF Rejection Blocks** identifies rejection blocks — zones defined by significant wick rejections at swing highs and lows — across the current timeframe and up to four higher timeframes. A rejection block (also called an RB) marks the price range between the candle body and the tip of the rejecting wick at a swing point. This zone represents where institutional orders were placed to reject price, and it frequently acts as a re-entry point when price returns to it.
+
+Unlike standard order blocks (which focus on the last candle before a move), rejection blocks focus specifically on wick-dominated candles — those where the body is small and the wick is long, indicating strong rejection of a price level. The indicator draws each block as a colored box, optionally adds a 50% midline, and fires alerts when a new block forms or when price enters an existing one.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### Functionality Settings
+
+**Swing Strength** — integer, min 1 (default: `1`)
+
+The pivot lookback for swing detection. A value of 1 means a swing high only needs to be the highest high of the bar itself plus the adjacent bars. Increase to require more bars of confirmation and detect only more significant swings. For 1-minute chart execution, `1` is the standard.
+
+---
+
+### Timeframe Settings
+
+**Show Current TF** — toggle (default: on)
+
+Enables rejection block drawing on the current chart timeframe.
+
+---
+
+**Show HTF 1 through HTF 4** — toggle + timeframe selector (each, all off by default)
+
+Four additional timeframe slots. Enable and set each to the HTF you want to overlay.
+
+---
+
+### Block Appearance
+
+**Bullish Block** — color picker (default: teal, 90% transparent)
+
+Fill color for bullish rejection blocks.
+
+---
+
+**Bearish Block** — color picker (default: red, 90% transparent)
+
+Fill color for bearish rejection blocks.
+
+---
+
+**Show Border** — toggle (default: on)
+
+Adds a border outline around each block.
+
+---
+
+**Bullish Border Color** — color picker (default: teal, fully opaque)
+
+Border color for bullish blocks.
+
+---
+
+**Bearish Border Color** — color picker (default: red, fully opaque)
+
+Border color for bearish blocks.
+
+---
+
+**Border Width** — integer, 0–5 (default: `1`)
+
+Thickness of the block border.
+
+---
+
+**Show 50% Level** — toggle (default: on)
+
+Draws a midline through each block at the 50% level.
+
+---
+
+**50% Line Color** — color picker (default: white, 50% transparent)
+
+Color of the midline.
+
+---
+
+**Use Wick for Mitigation** — toggle (default: off)
+
+When off, blocks are only mitigated by a candle close through the zone. When on, a wick through the zone is enough to mark mitigation. The default close-based approach is more conservative.
+
+---
+
+### Label Settings
+
+**Show Labels** — toggle (default: on)
+
+Displays a label inside each block indicating the timeframe and direction.
+
+---
+
+**Size** — `Tiny` | `Small` | `Normal` (default: `Small`)
+
+Label text size.
+
+---
+
+**Color** — color picker (default: white)
+
+Label text color.
+
+---
+
+### Info Box
+
+**Show Info Box** — toggle (default: on)
+
+Shows the indicator info panel at the bottom center of the chart.
+
+---
+
+**Text Color** — color picker (default: black, 20% transparent)
+
+Color of info box text.
+
+---
+
+### Alerts
+
+**Enable Alerts** — toggle (default: on)
+
+Master toggle for all alerts.
+
+---
+
+**Session 1 / 2 / 3** — toggle + session time
+
+Alert windows. Session 1 defaults to `0930-1600` and is on. Sessions 2 and 3 are off, defaulting to `2000-0000` and `0200-0500` respectively. Alerts only fire within enabled session windows.
+
+---
+
+**Alert on Block Form** — toggle + message (default: on, `A rejection block has formed.`)
+
+Fires when a new rejection block is detected.
+
+---
+
+**Alert on Block Entry** — toggle + message (default: on, `Price has entered a rejection block.`)
+
+Fires when price enters an existing, unmitigated rejection block.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+HTF Rejection Blocks is used alongside the standard FVG and order block indicators during live sessions. The block entry alert is particularly useful — when price enters a 15-minute or 60-minute rejection block during the AM session, it gets the team's immediate attention. A block entry combined with a 1-minute CISD or FVG inside the block zone is a clean entry trigger.
+
+The 50% level inside each block is the default limit order placement. The block's extreme (the wick tip) acts as the invalidation level — if price closes beyond the wick tip, the block is broken and the setup is off. This gives a tight, well-defined stop placement relative to the entry at the midline.

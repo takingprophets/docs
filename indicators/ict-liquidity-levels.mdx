@@ -1,24 +1,116 @@
 ---
 title: "ICT Liquidity Levels"
-description: "Automatically detects and draws ICT-style liquidity levels — equal highs/lows, swing points, and session highs/lows."
+description: "Automatically detects swing highs and lows as buyside and sellside liquidity levels, with optional merging of nearby equal levels."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Automatically detects and draws ICT-style liquidity levels — equal highs/lows, swing points, and session highs/lows.
+**ICT Liquidity Levels** maps the structure of resting liquidity on the chart — the swing highs where buy-stop orders accumulate above price (buyside liquidity / BSL) and the swing lows where sell-stop orders accumulate below price (sellside liquidity / SSL). These levels are the targets that institutional price delivery is constantly seeking: before making a significant move, price typically sweeps one of these levels to trigger stop orders and acquire the liquidity needed to fill institutional positions.
+
+The indicator detects swing highs and lows using a configurable lookback, classifies each as major or minor based on the size of the swing relative to a percentage threshold, and draws each level as a colored horizontal line with a label. When price sweeps a level, it can either remove the line (if Keep Traded-Through Levels is off) or fade it to a lower opacity to indicate it's been taken.
+
+A key feature is the **REQ (Relatively Equal) merging** — when two levels of the same type fall within a configurable tick threshold of each other, they're merged into a single REQH (relatively equal highs) or REQL (relatively equal lows) label. These clustered equal highs and lows are particularly significant liquidity targets because multiple stop orders accumulate in the same small range.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+**Buyside Level Color** — color picker (default: teal `#089981`)
+
+Color for BSL (buy-stop liquidity / swing high) level lines.
+
+---
+
+**Sellside Level Color** — color picker (default: pink `#E91E63`)
+
+Color for SSL (sell-stop liquidity / swing low) level lines.
+
+---
+
+### Detection Settings
+
+**Base Swing Strength** — integer (default: `5`)
+
+The pivot lookback for swing detection. A value of 5 means a swing high must be the highest high in a 11-bar window (5 before, the pivot, 5 after). Increase for fewer but more significant swings; decrease for more frequent detection.
+
+---
+
+**Major Level Threshold %** — float, 0.1–2.0, step 0.1 (default: `0.5`)
+
+The minimum price movement percentage required for a swing to be classified as a "major" level. Swings smaller than this percentage are classified as minor. Major levels are typically drawn with a more prominent style. Adjust based on your instrument's typical daily range.
+
+---
+
+**Include Equal Highs/Lows** — toggle (default: on)
+
+When on, the pivot detection allows equal highs and lows (same price, not just higher/lower). This is important for ES futures where equal highs and lows commonly form. Turn off if you want strictly strict pivots that require a unique high/low.
+
+---
+
+**Merge Relative Equal Levels (REQ)** — toggle (default: on)
+
+When on, levels within the REQ Threshold distance of each other are merged into a single REQH/REQL label. This surfaces the most important liquidity pools — clustered levels are stronger targets than isolated ones.
+
+---
+
+**REQ Threshold (ticks)** — integer, min 1 (default: `2`)
+
+The distance in ticks within which two same-side levels are considered "relatively equal" and merged. 2 ticks is a tight threshold — increase to 3–5 if you want more aggressive merging on instruments with wider tick sizes.
+
+---
+
+### Visual Settings
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Style of the level lines.
+
+---
+
+**Line Width** — integer (default: `1`)
+
+Thickness of the level lines.
+
+---
+
+### Label Settings
+
+**Show Labels** — toggle (default: on)
+
+Displays text labels at each level.
+
+---
+
+**Label Placement** — `Left` | `Right` (default: `Right`)
+
+Positions labels at the start (`Left`) or end (`Right`) of each level line.
+
+---
+
+### Cleanup Settings
+
+**Delete After (Bars)** — integer (default: `1000`)
+
+Untouched levels are automatically deleted after this many bars. This prevents the chart from filling up with old levels. Reduce to 200–300 for faster cleanup during busy sessions.
+
+---
+
+### Traded Levels
+
+**Keep Traded-Through Levels** — toggle (default: on)
+
+When on, levels that price has swept through remain on the chart but fade to the traded opacity. When off, swept levels are deleted immediately.
+
+---
+
+**Traded-Through Opacity %** — integer, 0–100 (default: `75`)
+
+Opacity percentage applied to swept levels. 75% means swept lines are faint but still visible. Set higher (more transparent) for a cleaner look.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+ICT Liquidity Levels is the team's primary liquidity map. Before each session, the team scans the chart for the nearest BSL and SSL levels — these are the first targets of institutional price delivery. The AM session almost always begins with a sweep of one of these levels before the actual directional move.
+
+The REQH and REQL labels are particularly important: clustered equal highs or lows above/below market indicate a dense pool of stop orders. When the team sees a REQH directly above current price at the start of the session, they watch for a sweep of that level as the first signal to get short. The fade behavior for swept levels is left on by default — it helps track which liquidity has already been taken without completely removing the reference.

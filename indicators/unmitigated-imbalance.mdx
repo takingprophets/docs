@@ -1,24 +1,194 @@
 ---
 title: "Unmitigated Imbalance"
-description: "Tracks Fair Value Gaps and imbalances that have not yet been mitigated by price — keeping live POIs on your chart."
+description: "Tracks unmitigated Fair Value Gaps across multiple higher timeframes, showing only POIs that price has not yet returned to fill."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Tracks Fair Value Gaps and imbalances that have not yet been mitigated by price — keeping live POIs on your chart.
+**Unmitigated Imbalance** surfaces the most actionable Fair Value Gaps by showing only those that price has not yet revisited. While standard FVG indicators draw every gap as it forms and let them age on the chart, Unmitigated Imbalance filters continuously: the moment price returns to a gap (either closing into it or wicking into it, depending on your mitigation setting), that gap is removed. What remains on the chart is a live map of unfilled imbalances — the zones that institutional price delivery is most likely to return to.
+
+The indicator supports the current timeframe plus four higher-timeframe overlays (defaulting to 15m, 60m, and 240m on), so you can simultaneously see unmitigated gaps from the execution timeframe and from the context timeframes without switching charts. A configurable lookback window limits how far back gap detection searches so the chart doesn't fill up with historical imbalances.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Sensitivity** — sensitivity selector
+
+Controls the FVG detection threshold. Higher sensitivity detects smaller gaps; lower sensitivity only draws gaps above a minimum size. Adjust based on your instrument's tick size and the level of signal quality you need.
+
+---
+
+**Lookback** — lookback selector
+
+The bar lookback window for gap detection. Limits how many historical bars are scanned for unmitigated imbalances.
+
+---
+
+**Mitigation Type** — `Wick` | `Close` (default: `Wick`)
+
+Determines what constitutes mitigation. `Wick` removes a gap as soon as price touches it with any wick. `Close` only removes the gap when a candle closes inside it. `Wick` is the more aggressive (cleaner) setting — gaps disappear as soon as they're touched. `Close` is more conservative and keeps gaps visible until price commits.
+
+---
+
+### Appearance
+
+**Show Labels** — toggle
+
+Displays text labels at each unmitigated imbalance.
+
+---
+
+**Label Position** — `Left` | `Right` | `Center Above`
+
+Positions labels at the left edge, right edge, or centered above each gap box.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted`
+
+Style of the FVG box borders.
+
+---
+
+**Label Text Size** — size selector
+
+Font size for gap labels.
+
+---
+
+**Label Text Color** — color picker
+
+Color of the gap label text.
+
+---
+
+### Current Timeframe
+
+**Show Current TF** — toggle (default: off)
+
+Enables unmitigated FVG drawing on the current chart timeframe. Off by default — the current timeframe is typically handled by the dedicated FVG indicator.
+
+---
+
+**Current TF Bullish Color** — color picker (default: black)
+
+Fill color for bullish gaps on the current timeframe.
+
+---
+
+**Current TF Bearish Color** — color picker (default: black)
+
+Fill color for bearish gaps on the current timeframe.
+
+---
+
+### HTF 1
+
+**Show HTF 1** — toggle (default: on)
+
+Enables HTF 1 unmitigated FVG drawing. Default timeframe: `15`.
+
+---
+
+**HTF 1 Timeframe** — timeframe selector (default: `15`)
+
+The timeframe for HTF 1 gap detection.
+
+---
+
+**HTF 1 Bullish Color** — color picker
+
+Fill color for bullish unmitigated gaps from HTF 1.
+
+---
+
+**HTF 1 Bearish Color** — color picker
+
+Fill color for bearish unmitigated gaps from HTF 1.
+
+---
+
+### HTF 2
+
+**Show HTF 2** — toggle (default: on)
+
+Enables HTF 2 unmitigated FVG drawing. Default timeframe: `60`.
+
+---
+
+**HTF 2 Timeframe** — timeframe selector (default: `60`)
+
+The timeframe for HTF 2 gap detection.
+
+---
+
+**HTF 2 Bullish Color** — color picker
+
+Fill color for bullish unmitigated gaps from HTF 2.
+
+---
+
+**HTF 2 Bearish Color** — color picker
+
+Fill color for bearish unmitigated gaps from HTF 2.
+
+---
+
+### HTF 3
+
+**Show HTF 3** — toggle (default: on)
+
+Enables HTF 3 unmitigated FVG drawing. Default timeframe: `240`.
+
+---
+
+**HTF 3 Timeframe** — timeframe selector (default: `240`)
+
+The timeframe for HTF 3 gap detection.
+
+---
+
+**HTF 3 Bullish Color** — color picker
+
+Fill color for bullish unmitigated gaps from HTF 3.
+
+---
+
+**HTF 3 Bearish Color** — color picker
+
+Fill color for bearish unmitigated gaps from HTF 3.
+
+---
+
+### HTF 4
+
+**Show HTF 4** — toggle (default: off)
+
+Enables HTF 4 unmitigated FVG drawing. Default timeframe: `D`.
+
+---
+
+**HTF 4 Timeframe** — timeframe selector (default: `D`)
+
+The timeframe for HTF 4 gap detection.
+
+---
+
+**HTF 4 Bullish Color** — color picker
+
+Fill color for bullish unmitigated gaps from HTF 4.
+
+---
+
+**HTF 4 Bearish Color** — color picker
+
+Fill color for bearish unmitigated gaps from HTF 4.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+Unmitigated Imbalance is the team's draw-to target map. Before each session, the team scans the 15m, 60m, and 240m unmitigated gaps for the nearest unfilled imbalances above and below price — these are the institutional delivery targets for the session. An unmitigated 60-minute bullish FVG below price is a discount draw target; an unmitigated 240-minute bearish FVG above price is a premium target. The `Wick` mitigation setting keeps the chart clean: as soon as price touches a gap, it's gone. The current TF is left off because the dedicated FVG indicator handles intraday gap display with more granular controls.

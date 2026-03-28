@@ -1,24 +1,254 @@
 ---
 title: "CISD Model+"
-description: "A precision CISD-based entry model built for Triton Trades — combining Change in State of Delivery with liquidity and FVG confluence."
+description: "Advanced CISD-based entry model for Triton Trades with multi-timeframe setup grading, liquidity mapping, SMT divergence, and comprehensive alert support."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. Join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-CISD Model+ is a partner indicator built for the Triton Trades community. It detects Change in State of Delivery sequences and layers in liquidity sweeps and Fair Value Gap confluences to identify high-probability reversal entries.
+**CISD Model+** is a full-stack entry framework built for the Triton Trades community. It extends the core CISD (Change in State of Delivery) concept into a graded, multi-timeframe system that evaluates each setup against a configurable set of conditions: HTF PDA alignment, FVG confluence, liquidity sweep confirmation, and SMT divergence. Setups that meet more conditions receive higher grades; you can filter to only display setups at or above a minimum grade, keeping the chart clean.
+
+The indicator draws five layers simultaneously: liquidity levels (BSL and SSL), session liquidity references (Asia high/low, London high/low, prior day high/low, prior week high/low), Fair Value Gaps from an automatically or manually selected higher timeframe, CISD lines with potential current-TF detections, and a checklist that tracks which setup conditions are met in real time.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### General
+
+**Bias** — `Bullish` | `Bearish` | `Auto`
+
+Filters setups by directional bias. `Auto` shows all setups regardless of direction.
 
 ---
 
-## How to Get Access
+**Remove Invalidated Setups** — toggle
 
-Access to CISD Model+ is sold through the Triton Trades community on Whop. See the [How to Use](/how-to-use) guide for setup instructions once you've purchased.
+When on, setups that have been structurally invalidated are removed from the chart automatically.
+
+---
+
+**Num Setups Displayed** — integer
+
+The maximum number of simultaneous setups shown on the chart.
+
+---
+
+**Min Setup Grade to Display** — grade selector
+
+Filters out setups below this grade. Higher minimum grades show only the strongest confluences.
+
+---
+
+**Include Current TF in HTF** — toggle
+
+When on, the current chart timeframe is included when scanning for HTF CISD formations.
+
+---
+
+**Current TF Liquidity Sweeps** — toggle
+
+Enables liquidity sweep detection on the current timeframe.
+
+---
+
+**Ignore Close CISDs** — toggle
+
+When on, CISD formations that occur very close to the current price are filtered out to avoid noise.
+
+---
+
+**Max CISD Bars** — integer (default: `10`)
+
+The maximum number of bars back that a CISD is considered valid. CISDs older than this are expired.
+
+---
+
+### Liquidity
+
+**Alignment Mode** — `Auto` | `Manual`
+
+In `Auto`, the indicator selects liquidity reference timeframes automatically. In `Manual`, you control them directly.
+
+---
+
+**Show Liquidity** — toggle
+
+Enables drawing of buyside and sellside liquidity level lines.
+
+---
+
+**BSL Color** — color picker
+
+Color of buyside liquidity (swing high) levels.
+
+---
+
+**SSL Color** — color picker
+
+Color of sellside liquidity (swing low) levels.
+
+---
+
+**Show Liquidity Sweeps** — toggle
+
+Marks on the chart when a liquidity level has been swept by price.
+
+---
+
+**Sweep Color / Text** — color pickers
+
+Colors for the liquidity sweep marker and label text.
+
+---
+
+**Session Liquidity** — toggles for `Asia`, `London`, `PDH`, `PDL`, `PWH`, `PWL`
+
+Enables each type of session-based liquidity reference level. PDH/PDL are the prior day high and low; PWH/PWL are the prior week high and low. Each can be independently shown or hidden.
+
+---
+
+### FVG
+
+**Show FVGs** — toggle
+
+Enables Fair Value Gap drawing.
+
+---
+
+**FVG Border** — toggle
+
+Adds a border outline around each FVG box.
+
+---
+
+**FVG Max Per Side** — integer (default: `1`)
+
+The maximum number of FVGs displayed per side (bullish/bearish). Keeping this at 1 surfaces only the most recent relevant gap.
+
+---
+
+**FVG Timeframe Mode** — `Auto` | `Manual`
+
+In `Auto`, the FVG timeframe is selected based on the current chart timeframe. In `Manual`, you set it directly.
+
+---
+
+**FVG Label / Colors** — color pickers
+
+Label and fill colors for bullish and bearish FVG zones.
+
+---
+
+### CISD
+
+**Show CISD** — toggle
+
+Enables CISD line drawing.
+
+---
+
+**Show Potential Current TF CISDs** — toggle
+
+When on, CISD formations that are forming in real time on the current timeframe are displayed before full confirmation. Useful for anticipating the setup.
+
+---
+
+**Disable Current TF Labels** — toggle
+
+Suppresses labels on current-timeframe CISD lines to reduce visual clutter when HTF labels are sufficient.
+
+---
+
+**Detect CISD from SMTs** — toggle
+
+When on, SMT divergence signals at swing points can qualify as CISD events, allowing SMT-confirmed reversals to be treated as CISDs.
+
+---
+
+### SMT
+
+**Enable SMT** — toggle
+
+Enables Smart Money Technique divergence detection.
+
+---
+
+**Comparison Symbol** — symbol
+
+The correlated asset to compare against for SMT detection. Use `NQ1!` when trading ES and `ES1!` when trading NQ.
+
+---
+
+**SMT Style** — color, line style, width
+
+Visual settings for SMT divergence lines and labels.
+
+---
+
+### Alerts
+
+**Enable Alerts** — toggle
+
+Master toggle for all alerts.
+
+---
+
+**Session 1 / 2 / 3** — toggle + session time
+
+Alert windows. Only alerts that fire within an enabled session window are delivered.
+
+---
+
+Alert toggles and messages are provided for CISD formation, setup confirmation, and setup invalidation events.
+
+---
+
+### Watermark
+
+**Show Watermark** — toggle
+
+Displays the Triton Trades watermark on the chart.
+
+---
+
+### P03
+
+Settings controlling PO3 (Power of Three) phase detection and display.
+
+---
+
+### HTF CISD
+
+Settings for displaying HTF-sourced CISD lines alongside the current timeframe.
+
+---
+
+### Checklist
+
+**Show Checklist** — toggle
+
+Displays the real-time setup checklist showing which conditions (HTF PDA alignment, aligned timeframe, liquidity sweep, SMT divergence, CISD) have been met.
+
+---
+
+**Table Text Size** — size selector
+
+Font size for checklist table text.
+
+---
+
+**Header Colors** — color pickers
+
+Background and text colors for the checklist table header row.
+
+---
+
+**Cell Colors** — color pickers
+
+Normal and highlighted text colors for checklist rows.
+
+---
+
+## How We Use It
+
+CISD Model+ is Triton Trades' primary execution tool. The grading system allows the community to filter for only A+ or B+ setups by setting a minimum grade, eliminating the marginal setups that require more discretionary evaluation. The session liquidity levels (Asia high/low, London high/low, PDH/PDL, PWH/PWL) serve as the draw targets, and the FVG + CISD combination defines the entry. The checklist table runs continuously during the session — when all five conditions are lit up simultaneously, that's the highest-conviction setup. The `Detect CISD from SMTs` toggle is particularly useful at session extremes where an SMT divergence at a sweep coincides with a structural shift.

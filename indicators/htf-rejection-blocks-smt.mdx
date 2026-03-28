@@ -1,24 +1,152 @@
 ---
 title: "HTF Rejection Blocks + SMT"
-description: "HTF rejection blocks with built-in Smart Money Technique divergence detection on a correlated asset."
+description: "Projects higher-timeframe rejection blocks onto your chart with built-in Smart Money Technique divergence detection."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-HTF rejection blocks with built-in Smart Money Technique divergence detection on a correlated asset.
+**HTF Rejection Blocks + SMT** combines two complementary tools: multi-timeframe rejection block detection and Smart Money Technique (SMT) divergence analysis. Rejection blocks are formed by significant wick rejections at swing highs and lows — the zone defined by the body-to-wick relationship of the rejection candle. SMT divergence occurs when your instrument makes a new swing extreme but its correlated asset does not, indicating the sweep may be a manipulation rather than a genuine breakout.
+
+Together, these tools identify the most compelling reversal zones: a rejection block at a swing high where the correlated asset failed to confirm the new high is a high-conviction short setup, and vice versa for lows. The indicator supports up to four higher timeframes plus the current timeframe, each independently configurable, and the SMT detection runs continuously in real time.
+
+An info box at the bottom of the chart displays the indicator name, timeframe, symbol, and date for reference.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+### Info Box Settings
+
+**Display Info Box** — toggle (default: on)
+
+Shows the info panel at the bottom center.
+
+---
+
+**Info Box Text Color** — color picker (default: black, 20% transparent)
+
+Color of the info box text.
+
+---
+
+### Timeframes
+
+**Show Current TF** — toggle (default: on)
+
+Enables rejection block detection on the current chart timeframe.
+
+---
+
+**Show HTF 1 through HTF 4** — toggle + timeframe selector (each)
+
+Four HTF slots, all off by default. Enable and set each to the timeframe you want. The selector starts blank; you must enter a value.
+
+---
+
+### Rejection Block Settings
+
+**Bullish Block Color** — color picker (default: teal, 90% transparent)
+
+Fill for bullish rejection blocks.
+
+---
+
+**Bearish Block Color** — color picker (default: red, 90% transparent)
+
+Fill for bearish rejection blocks.
+
+---
+
+**Show Border** — toggle (default: on)
+
+Adds a border outline to each block.
+
+---
+
+**Border Width** — integer, 1–4 (default: `1`)
+
+Thickness of the block border.
+
+---
+
+**Show 50% Level Line** — toggle (default: on)
+
+Draws a line at the midpoint of each rejection block. This is the standard entry target within the block.
+
+---
+
+**Label Size** — `Tiny` | `Small` | `Normal` (default: `Small`)
+
+Size of the label text inside each block.
+
+---
+
+**Mitigation on Wick** — toggle (default: off)
+
+When off (default), a block is mitigated only when price closes through it. When on, a wick through the block is enough to mark it as mitigated. The default close-based mitigation is more conservative and produces cleaner setups.
+
+---
+
+**Minimum Swing Size** — integer (default: `20`)
+
+The minimum number of ticks (points) required for a swing to qualify as a rejection. Higher values filter out minor wicks and only show significant swing rejections. Adjust based on your instrument's typical range.
+
+---
+
+### SMT Settings
+
+**Primary Pivot Lookback** — integer, min 2 (default: `5`)
+
+The pivot lookback for the primary (smaller) SMT swing detection.
+
+---
+
+**Secondary Pivot Lookback** — integer, min 2 (default: `8`)
+
+The pivot lookback for the secondary (larger) SMT swing detection.
+
+---
+
+**Comparison Symbol** — symbol (default: `ES1!`)
+
+The correlated asset to compare against. Change to `NQ1!` when trading ES, and keep as `ES1!` when trading NQ.
+
+---
+
+**Only Display Significant** — toggle (default: off)
+
+When on, only SMT divergences at the secondary (larger) pivot size are displayed. This reduces signals but shows only the most structurally significant divergences.
+
+---
+
+### SMT Style
+
+**Line Color** — color picker (default: white)
+
+Color of the SMT divergence lines.
+
+---
+
+**Line Width** — integer, 1–4 (default: `1`)
+
+Thickness of SMT lines.
+
+---
+
+**Line Style** — `Solid` | `Dashed` | `Dotted` (default: `Dashed`)
+
+Style of SMT lines.
+
+---
+
+**Label Size** — `Auto` | `Tiny` | `Small` | `Normal` | `Large` | `Huge` (default: `Small`)
+
+Size of SMT labels.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The HTF Rejection Blocks + SMT indicator is used when the team wants SMT context directly alongside the rejection block zone. The combination is particularly powerful at AM session highs and lows: when price sweeps a session high into a 15-minute or 1-hour rejection block and the correlated asset fails to confirm the new high, both signals fire simultaneously in the same zone. That's the entry — short on the close of the rejection candle, with a stop above the rejection block high and a target at the next key low or FVG.
+
+The 50% level line inside each block is the default limit order target. The block itself acts as the risk definition — stops go just beyond the block's extreme.

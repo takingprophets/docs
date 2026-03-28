@@ -1,24 +1,76 @@
 ---
 title: "HTF Market Structure"
-description: "Draws higher timeframe market structure breaks and shifts of character — defining the macro trend direction."
+description: "Draws Break of Structure and Change of Character labels across multiple timeframes with optional candle coloring."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Draws higher timeframe market structure breaks and shifts of character — defining the macro trend direction.
+**HTF Market Structure** identifies and marks two of the most important market structure events in ICT trading: **Break of Structure (BOS)** and **Change of Character (CHoCH)**. These labels appear directly on price action as price breaks through swing highs or lows, giving you a clear visual history of directional shifts and trend continuations.
+
+A BOS occurs when price breaks through a swing high or low in the direction of the prevailing trend — confirming that the trend is continuing. A CHoCH (Change of Character) occurs when price breaks through a swing in the opposite direction of the trend — signaling a potential reversal. The CHoCH is the first sign that a trend may be ending, while the BOS confirms the trend is still intact.
+
+The indicator also displays a multi-timeframe structure table in the top-right corner showing the current market state (Bullish, Bearish, or None) for six fixed timeframes: Weekly, Daily, 4H, 1H, 15m, and 5m. And it optionally colors your candles based on the last CHoCH direction — bullish candles after a bullish CHoCH, bearish after a bearish one — so you can instantly see the structural bias of each timeframe.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+**Lookback** — integer, min 3 (default: `3`)
+
+The number of bars used to identify swing highs and lows. A value of 3 means a swing high must have lower highs on both the 3 bars before and 3 bars after it. Lower values (3–5) are more sensitive and catch structure on faster timeframes. Higher values (8–15) require more significant swings and reduce noise.
+
+---
+
+### Structure Type
+
+**Show BOS** — toggle (default: on)
+
+Draws a line and "BOS" label when price breaks through a swing in the direction of the trend.
+
+---
+
+**Show CHoCH** — toggle (default: on)
+
+Draws a line and "CHoCH" label when price breaks through a swing against the prevailing trend, signaling a potential reversal.
+
+---
+
+### Candle Colors
+
+**Color Candles after CHoCH** — toggle (default: on)
+
+When on, candles are colored based on the most recent CHoCH direction. All candles following a bullish CHoCH are colored the bullish color; all candles following a bearish CHoCH are colored the bearish color. This gives you a persistent visual bias indicator built into the candles themselves.
+
+---
+
+**Bullish Candles** — color picker (default: teal `#089981`)
+
+Color applied to bullish candles after a bullish CHoCH.
+
+---
+
+**Bearish Candles** — color picker (default: red `#f23645`)
+
+Color applied to bearish candles after a bearish CHoCH.
+
+---
+
+### Style
+
+**Bullish Structures** — color picker (default: teal `#089981`)
+
+Color for BOS and CHoCH lines and labels in the bullish direction.
+
+---
+
+**Bearish Structures** — color picker (default: red `#f23645`)
+
+Color for BOS and CHoCH lines and labels in the bearish direction.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The HTF Market Structure indicator is the team's timeframe alignment tool. Before entering any trade, the state table in the top-right corner is checked — if the Weekly, Daily, and 4H are all showing "Bullish," the bias is clear and only long setups are taken. If there's disagreement across timeframes, the team waits for alignment or trades with reduced size.
+
+The CHoCH on the 1-minute and 5-minute charts is particularly useful as a confirmation signal for entries: a bullish CHoCH on the 5-minute chart after an AM liquidity sweep confirms that the short-term structure has shifted in favor of the trade. The candle coloring feature helps maintain awareness of the current structural bias without having to re-read labels every few bars.

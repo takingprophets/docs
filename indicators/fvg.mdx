@@ -1,24 +1,60 @@
 ---
 title: "Fair Value Gap"
-description: "Detects and draws Fair Value Gaps on the chart — bullish and bearish imbalances left behind by impulsive price moves."
+description: "Detects and draws bullish and bearish Fair Value Gaps on any timeframe, including overnight opening gaps."
 ---
-
-<Info>
-  Full documentation for this indicator is coming soon. In the meantime, join the [`#indicator-support`](https://discord.gg/takingprophets) channel on Discord or catch us during the live session (9–11 AM ET) for help getting set up.
-</Info>
 
 ## Overview
 
-Detects and draws Fair Value Gaps on the chart — bullish and bearish imbalances left behind by impulsive price moves.
+**Fair Value Gap (FVG)** is one of the most fundamental concepts in ICT-based trading. An FVG forms when price moves so quickly in one direction that a three-candle sequence creates an imbalance — a price range that was never traded on both sides. Bullish FVGs are gaps between the high of the first candle and the low of the third candle when price moves up aggressively. Bearish FVGs are gaps between the low of the first candle and the high of the third candle when price drops sharply. These zones often act as draw targets and re-entry areas when price returns to them.
+
+This indicator detects and draws all three types of gaps: standard bullish and bearish FVGs formed by price action, and opening gaps (NWOG and NDOG) that form when price gaps up or down at the start of a new week or day. Opening gaps are particularly significant in futures markets where the session closes at 5 PM and reopens at 6 PM ET.
+
+On the chart you'll see colored boxes for each unmitigated gap, with an optional 50% midline (Consequent Encroachment) for each one. Gaps disappear when price closes fully through them — a body close below the bottom of a bullish FVG or above the top of a bearish FVG counts as mitigation. An optional combine mode merges back-to-back same-direction FVGs into one larger zone.
 
 ---
 
 ## Settings
 
-*Full input breakdown coming soon.*
+**Bullish FVG Color** — color picker (default: green)
+
+Fill color for bullish imbalances. These are gaps below price acting as support zones.
+
+---
+
+**Bearish FVG Color** — color picker (default: red)
+
+Fill color for bearish imbalances. These are gaps above price acting as resistance zones.
+
+---
+
+**Opening Gap Color** — color picker (default: gray)
+
+Color for NWOG (New Week Opening Gap) and NDOG (New Day Opening Gap) boxes. These are labeled on the chart.
+
+---
+
+**Combine Consecutive FVGs** — toggle (default: off)
+
+When enabled, back-to-back FVGs of the same direction that form on consecutive bars are merged into a single larger box. This reduces clutter and treats clustered imbalances as one unified zone. Turn on when you prefer working with consolidated zones rather than individual gaps.
+
+---
+
+**Show Consequent Encroachment** — toggle (default: off)
+
+Draws a dashed line at the 50% midpoint of each FVG. The Consequent Encroachment (CE) is a key reference level — price frequently reacts at the exact midpoint of a gap before continuing. Enable this when you're actively managing entries and need precise price levels within each gap.
+
+---
+
+**Show Border** — toggle (default: on)
+
+Adds an outline border around each FVG box. Disable for a cleaner look, especially when using highly transparent fill colors.
 
 ---
 
 ## How We Use It
 
-*Notes on how the Taking Prophets team uses this indicator during live sessions coming soon.*
+The FVG indicator is the baseline for identifying where price is likely to return. During live sessions, the team watches for price to pull back into an unmitigated FVG after a displacement move. The entry thesis is straightforward: if price created a significant gap during a strong directional move, it's likely to revisit that zone to balance orders before continuing.
+
+For standard intraday trading, FVGs on the 1-minute and 5-minute charts are the primary entry zones. The team waits for a liquidity sweep above a swing high or below a swing low, then looks for price to pull back into the nearest FVG left behind by the displacement candle. The CE level is particularly useful for setting precise limit orders at the midpoint when you don't want to chase.
+
+Opening gaps — especially NDOGs from the 6 PM reopen — are treated as high-priority draw targets at the start of each session. When price trades below an NDOG during the morning session and that gap is unmitigated, it often becomes the first target to the upside before any continuation.
