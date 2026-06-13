@@ -3,9 +3,25 @@
   "theme": "mint",
   "name": "Taking Prophets",
   "colors": {
-    "primary": "#1E3A5F",
-    "light": "#4A7FBF",
-    "dark": "#1E3A5F"
+    "primary": "#2563eb",
+    "light": "#3b82f6",
+    "dark": "#3b82f6"
+  },
+  "appearance": {
+    "default": "dark"
+  },
+  "background": {
+    "decoration": "gradient",
+    "color": {
+      "light": "#ffffff",
+      "dark": "#000000"
+    }
+  },
+  "fonts": {
+    "family": "Inter"
+  },
+  "styling": {
+    "codeblocks": "dark"
   },
   "favicon": "/favicon.svg",
   "navigation": {
