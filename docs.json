@@ -177,5 +177,14 @@
       "discord": "https://discord.gg/takingprophets",
       "instagram": "https://instagram.com/takingprophets"
     }
+  },
+  "seo": {
+    "metatags": {
+      "robots": "noindex"
+    }
+  },
+  "banner": {
+    "content": "These docs have moved. The current guides and indicator manuals are at [takingprophets.com/docs](https://www.takingprophets.com/docs).",
+    "dismissible": false
   }
 }
